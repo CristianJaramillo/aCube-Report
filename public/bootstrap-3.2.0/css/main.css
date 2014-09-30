@@ -1,0 +1,76 @@
+.bg-black {
+  color: #fff;
+  background-color: #222222;
+}
+a.bg-black:hover {
+  background-color: #444444;
+}
+.ease, tbody.ease tr{
+	transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+}
+tbody.info tr:hover {
+	background-color: #269abc;
+  border-color: #269abc;
+	color: #fff;
+	cursor: pointer;
+}
+thead.info{
+	background-color: #F8F8F8;
+}
+.facebook{
+  background-image: url(../img/facebook.png);
+}
+.facebook:hover{
+  background-image: url(../img/facebook-hover.png);
+}
+.facebook, .google, .twitter, .youtube{
+  background-color: #000000;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+  cursor: pointer;
+  display: inline-block;
+  height: 32px;
+  padding: 0 4px;
+  width: 32px;
+}
+.facebook:hover, .google:hover, .twitter:hover, .youtube:hover{
+  background-color: #FFFFFF;
+}
+.google{
+  background-image: url(../img/google.png);
+}
+.google:hover{
+  background-image: url(../img/google-hover.png);
+}
+.social-buttons{
+  text-align: right;
+}
+.twitter{
+  background-image: url(../img/twitter.png);
+}
+.twitter:hover{
+  background-image: url(../img/twitter-hover.png);
+}
+.youtube{
+  background-image: url(../img/youtube.png);
+}
+.youtube:hover{
+  background-image: url(../img/youtube-hover.png);
+}
+
+@media screen and (min-width: 992px) {
+  .social-buttons{
+    margin-top: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .social-buttons{
+    margin-top: 34px;
+  }
+}
