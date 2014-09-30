@@ -26,6 +26,14 @@ abstract class BaseRepo {
     }
 
     /**
+     * @return
+     */
+    public function all()
+    {
+        return $this->entitie->all();
+    }
+
+    /**
      * @return \Eloquent
      */
     abstract public function getEntitie();

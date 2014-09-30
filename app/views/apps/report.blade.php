@@ -88,23 +88,19 @@
 @endsection
 
 @section('item-navbar')
-	<form class="navbar-form navbar-right" role="search">
+	{{ Form::open(['class' => 'navbar-form navbar-right', 'id' => 'search', 'method' => 'POST', 'role' => 'search', 'route' => 'responce']) }}
 		<div class="form-group">
-			<select class="form-control">
-				<option>-- Queue --</option>
-			</select>
+			{{ Form::select('queue', $queue, 'all', array('class' => 'form-control')) }}
 		</div>
 		<div class="form-group">
-			<select class="form-control">
-				<option>-- Agent --</option>
-			</select>
+			{{ Form::select('queue_member', $queueMember, 'all', array('class' => 'form-control')) }}
 		</div>
 		<div class="form-group">
-			<input class="form-control" placeholder="dd/mm/aaaa" type="date" />
+			{{ Form::input('date', 'date_from', NULL, array('class' => 'form-control', 'placeholder' => date("d/m/Y"), 'required')) }}
 		</div>
 	    <div class="form-group">
-	    	<input class="form-control" placeholder="dd/mm/aaaa" type="date" />
+	    	{{ Form::input('date', 'date_up', NULL, array('class' => 'form-control', 'placeholder' => date("d/m/Y"), 'required')) }}
 	    </div>
-	    <button type="submit" class="btn btn-success">Submit</button>
-	</form>
+	    <button type="submit" class="btn btn-info">Buscar</button>
+	{{ Form::close() }}
 @endsection
