@@ -26,9 +26,12 @@ class LogQueueRepo extends BaseRepo {
      */
     public function logAgent($agent, $from, $to)
     {
+        $ids = $this->entitie->callids('agent', $agent, $from, $to);
+
         return $this->entitie
-                    ->agent($agent)
-                    ->time($from, $to);
+                        ->callIn($ids)
+                        ->eventIn()
+                        ->get();
     }
 
     /**
@@ -36,9 +39,12 @@ class LogQueueRepo extends BaseRepo {
      */
     public function logQueue($queue, $from, $to)
     {
+        $ids = $this->entitie->callids('queuename', $queue, $from, $to);
+
         return $this->entitie
-                    ->queue($queue)
-                    ->time($from, $to);
+                        ->call$ids)
+                        ->event()
+                        ->get();
     }
 
     /**
@@ -46,10 +52,12 @@ class LogQueueRepo extends BaseRepo {
 	 */
 	public function logQueueAgent($queue, $agent, $from, $to)
 	{
+        $ids = $this->entitie->queue($queue)->callids('agent', $agent, $from, $to);
+
 		return $this->entitie
-                    ->queue($queue)
-                    ->agent($agent)
-                    ->time($from, $to);
+                        ->callIn($ids)
+                        ->eventIn()
+                        ->get();
 	}
 
     /**
@@ -57,7 +65,10 @@ class LogQueueRepo extends BaseRepo {
      */
     public function logTime($from, $to)
     {
-        return $this->entitie->time($from, $to);
+        return $this->entitie
+                        ->eventIn()
+                        ->dateBetween($from, $to)
+                        ->get();
     }
 
 } 

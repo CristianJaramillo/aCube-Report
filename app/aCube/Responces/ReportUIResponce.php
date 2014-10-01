@@ -80,24 +80,30 @@ class ReportUIResponce extends BaseResponce
 					$this->data['date_from'], 
 					$this->data['date_to']
 				);
+			$message = 'QueueAndMemeber';
 		} elseif ($this->data['queue'] != 'all') {
 			$success = $this->repository->logQueue(
 					$this->data['queue'],
 					$this->data['date_from'], 
 					$this->data['date_to']
 				);
+			$message = 'Queue';
 		} elseif ($this->data['queue_member'] != 'all') {
 			$success = $this->repository->logAgent(
 					$this->data['queue_member'],
 					$this->data['date_from'], 
 					$this->data['date_to']
 				);
+			$message = 'Memeber';
 		} else {
 			$success = $this->repository->logTime(
 					$this->data['date_from'], 
 					$this->data['date_to']
 				);
+			$message = 'Date';
 		}
+
+		$this->addMessage($message);
 
 		return $this->preparateSuccess($success);
 
@@ -118,6 +124,12 @@ class ReportUIResponce extends BaseResponce
 	public function valid()
 	{
 
+		if ($this->data['queue'] != 'all' && $this->data['queue_member'] != 'all')
+		{
+			$this->rules['queue_member'] .= '|exists:config_queue_members,membername,queue_name,'
+							      		 .$this->data['queue_member'];
+		} 
+
 		if ($this->data['queue'] != 'all') {
         	$this->rules['queue'] .= '|exists:config_queues,name';	
         }
@@ -132,9 +144,21 @@ class ReportUIResponce extends BaseResponce
         {
             $this->addError($validation->messages());
         } else {
+        	$this->setupDate($this->data['date_from'], $this->data['date_to']);
         	$this->addSuccess($this->preparate());
         }
 
+	}
+
+	/**
+	 * @return void
+	 */
+	public function setupDate($from, $to)
+	{
+		if (strtotime($from) > strtotime($to)) {
+			$this->data['date_from'] = $to;
+			$this->data['date_to'] = $from;	
+		}
 	}
 
 }

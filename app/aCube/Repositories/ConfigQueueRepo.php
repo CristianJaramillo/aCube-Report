@@ -29,4 +29,34 @@ class ConfigQueueRepo extends BaseRepo {
 		return $this->entitie->lists('name', 'name');
 	}
 
+    /**
+     * @return
+     */
+    public function queuesAndMemebers()
+    {
+        return $this->entitie->with('members')->get();
+    }
+
+    /**
+     * @return
+     */
+    public function listQueuesAndMembers()
+    {
+        $queues = array();
+
+        foreach ($this->queuesAndMemebers() as $queue)
+        {
+            $aux = array();
+
+            foreach ($queue->members as $member) {
+                $aux[] = $member->membername;
+            }
+
+            $queues[$queue->name] = $aux;
+    
+        }
+
+        return $queues;
+    }
+
 } 

@@ -21,23 +21,50 @@ class LogQueue extends \Eloquent {
 
     /**
      * @param $query
-     * @param $agent
+     * @param $column
+     * @param $value
+     * @param $from
+     * @param $to
+     * @return array $query
+     */
+    public function scopeCallids($query, $column, $value, $from, $to)
+    {
+        return $query->where($column, $value)
+                     ->dateBetween($from, $to)
+                     ->groupBy('callid')
+                     ->lists('callid');
+    }
+
+    /**
+     * @param $query
+     * @param $ids
      * @return $query
      */
-    public function scopeAgent($query, $agent)
+    public function scopeCalls($query, $ids)
     {
-    	return $query->WhereIn('agent', array(
-                    $agent,
-                    'NONE',
-                )
-            );
+        return $query->whereIn('callid', $ids);
+    }
+
+    /**
+     * @param $query
+     * @param $from
+     * @param $to
+     * @return $query
+     */
+    public function scopeDateBetween($query, $from, $to)
+    {
+        return $query->whereBetween('time', array(
+                        $from.'  00:00:00',
+                        $to.' 23:59:59'
+                     )
+                )->orderBy('time', 'desc');
     }
 
     /**
      * @param $query
      * @return $query
      */
-    public function scopeEvent($query)
+    public function scopeEvents($query)
     {
     	return $query->whereIn('event', array(
     	    		'ENTERQUEUE',
@@ -49,7 +76,7 @@ class LogQueue extends \Eloquent {
     	    		'EXITEMPTY',
     	    		'ABANDON',
         		)
-        	)->orderBy('time', 'desc')->get();
+        	);
     }
 
     /**
@@ -59,22 +86,7 @@ class LogQueue extends \Eloquent {
      */
     public function scopeQueue($query, $queue)
     {
-    	return $query->Where('queuename', $queue);
-    }
-
-    /**
-     * @param $query
-     * @param $from
-     * @param $to
-     * @return $query
-     */
-    public function scopeTime($query, $from, $to)
-    {
-    	return $query->whereBetween('time', array(
-        			$from.'  00:00:00',
-        			$to.' 23:59:59'
-        		)
-        	)->event();
+    	return $query->where('queuename', $queue);
     }
 
 } 

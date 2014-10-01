@@ -19,4 +19,12 @@ class ConfigQueue extends \Eloquent {
      */
     protected $table = 'config_queues';
 
+    /**
+     * @return
+     */
+    public function members()
+    {
+    	return $this->hasMany('aCube\Entities\ConfigQueueMember', 'queue_name', 'name');
+    }
+
 } 

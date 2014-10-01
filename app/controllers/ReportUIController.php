@@ -25,10 +25,11 @@ class ReportUIController extends BaseController {
 		$queueMemberRepo = new ConfigQueueMemberRepo();
 
 		$this->addParam([
-				'queue'       => array('all' => '-- Queue --') + 
-								 $queueRepo->listNames(),
-				'queueMember' => array('all' => '-- Queue Members --') + 
-								 $queueMemberRepo->listNames(),
+				'queue'            => array('all' => '-- All Queue --') + 
+								      $queueRepo->listNames(),
+				'queueMember'      => array('all' => '-- All Queue Members --') + 
+								      $queueMemberRepo->listNames(),
+				'queuesAndMembers' => $queueRepo->listQueuesAndMembers()
 			]);
 
 		return $this->show();
@@ -44,14 +45,11 @@ class ReportUIController extends BaseController {
 		$response = new ReportUIResponce(new LogQueueRepo(), Input::all());
 
 		$response->execute();
-		/*
+
 		echo "<pre>";
 		print_r($response);
 		echo "</pre>";
-	
 		dd();
-		*/
-
 		return $this->showReportUI();
 	}
 
