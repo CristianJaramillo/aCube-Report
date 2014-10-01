@@ -1,11 +1,5 @@
 <?php
 
-// Arturo - 
-
-/**
- * mensaje disminuido a 10seg
- */
-
 /**
  * Created by PhpStorm.
  * User: LENOVOW8

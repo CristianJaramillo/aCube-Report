@@ -21,4 +21,43 @@ class LogQueueRepo extends BaseRepo {
         return new LogQueue();
     }
 
+    /**
+     * @return
+     */
+    public function logAgent($agent, $from, $to)
+    {
+        return $this->entitie
+                    ->agent($agent)
+                    ->time($from, $to);
+    }
+
+    /**
+     * @return
+     */
+    public function logQueue($queue, $from, $to)
+    {
+        return $this->entitie
+                    ->queue($queue)
+                    ->time($from, $to);
+    }
+
+    /**
+	 * @return
+	 */
+	public function logQueueAgent($queue, $agent, $from, $to)
+	{
+		return $this->entitie
+                    ->queue($queue)
+                    ->agent($agent)
+                    ->time($from, $to);
+	}
+
+    /**
+     * @return
+     */
+    public function logTime($from, $to)
+    {
+        return $this->entitie->time($from, $to);
+    }
+
 } 

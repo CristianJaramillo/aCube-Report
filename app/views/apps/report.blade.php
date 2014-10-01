@@ -96,10 +96,10 @@
 			{{ Form::select('queue_member', $queueMember, 'all', array('class' => 'form-control')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::input('date', 'date_from', NULL, array('class' => 'form-control', 'placeholder' => date("d/m/Y"), 'required')) }}
+			{{ Form::input('date', 'date_from', NULL, array('class' => 'form-control', 'placeholder' => date("Y-m-d"), 'required')) }}
 		</div>
 	    <div class="form-group">
-	    	{{ Form::input('date', 'date_up', NULL, array('class' => 'form-control', 'placeholder' => date("d/m/Y"), 'required')) }}
+	    	{{ Form::input('date', 'date_to', NULL, array('class' => 'form-control', 'placeholder' => date("Y-m-d"), 'required')) }}
 	    </div>
 	    <button type="submit" class="btn btn-info">Buscar</button>
 	{{ Form::close() }}

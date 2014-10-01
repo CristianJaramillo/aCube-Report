@@ -14,7 +14,7 @@ class ReportUIResponce extends BaseResponce
 	 */
 	public function addError($error)
 	{
-		$this->responce->error[] = $error;
+		$this->responce->error = $error;
 	}
 
 	/**
@@ -23,7 +23,7 @@ class ReportUIResponce extends BaseResponce
 	 */
 	public function addMessage($message)
 	{
-		$this->responce->message[] = $message;
+		$this->responce->message = $message;
 	}
 
 	/**
@@ -32,7 +32,7 @@ class ReportUIResponce extends BaseResponce
 	 */
 	public function addSuccess($success)
 	{
-		$this->responce->success[] = $success;
+		$this->responce->success = $success;
 	}
 
 	/**
@@ -53,11 +53,88 @@ class ReportUIResponce extends BaseResponce
 	public function getRules()
 	{
 		return array(
-				'queue'        => 'exists:config_queues,name|required',
-				'queue_member' => 'exists:config_queue_members,membername|required',
-				'date_from'    => 'required',
-				'date_up'      => 'required',
+				'queue'        => 'required',
+				'queue_member' => 'required',
+				'date_from'    => 'before:'.getDay(1).'|date_format:Y-m-d|required',
+				'date_to'      => 'before:'.getDay(1).'|date_format:Y-m-d|required',
 			);
 	}	
+
+	/**
+	 * @return void
+	 */
+	public function execute()
+	{
+		$this->valid();
+	}
+
+	/**
+	 * @return
+	 */
+	public function preparate()
+	{
+		if ($this->data['queue'] != 'all' && $this->data['queue_member'] != 'all') {
+			$success = $this->repository->logQueueAgent(
+					$this->data['queue'],
+					$this->data['queue_member'],
+					$this->data['date_from'], 
+					$this->data['date_to']
+				);
+		} elseif ($this->data['queue'] != 'all') {
+			$success = $this->repository->logQueue(
+					$this->data['queue'],
+					$this->data['date_from'], 
+					$this->data['date_to']
+				);
+		} elseif ($this->data['queue_member'] != 'all') {
+			$success = $this->repository->logAgent(
+					$this->data['queue_member'],
+					$this->data['date_from'], 
+					$this->data['date_to']
+				);
+		} else {
+			$success = $this->repository->logTime(
+					$this->data['date_from'], 
+					$this->data['date_to']
+				);
+		}
+
+		return $this->preparateSuccess($success);
+
+	}
+
+	/**
+	 * @param $success
+	 * @return $success
+	 */
+	public function preparateSuccess($success)
+	{
+		return $success;
+	}
+
+	/**
+	 * @return void
+	 */
+	public function valid()
+	{
+
+		if ($this->data['queue'] != 'all') {
+        	$this->rules['queue'] .= '|exists:config_queues,name';	
+        }
+
+        if ($this->data['queue_member'] != 'all') {
+        	$this->rules['queue_member'] .= '|exists:config_queue_members,membername';
+        }
+
+		$validation = \Validator::make($this->data, $this->rules);
+
+		if ($validation->fails())
+        {
+            $this->addError($validation->messages());
+        } else {
+        	$this->addSuccess($this->preparate());
+        }
+
+	}
 
 }

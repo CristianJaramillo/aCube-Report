@@ -79,3 +79,16 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+/*
+|--------------------------------------------------------------------------
+| Return day
+|--------------------------------------------------------------------------
+*/
+if ( ! function_exists('getDay'))
+{
+    function getDay($n = 0)
+    {
+        return date("Y-m-d", mktime(0, 0, 0, date('m'), date('d') + $n, date('Y')));
+    }
+}
