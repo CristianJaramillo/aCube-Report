@@ -90,17 +90,34 @@
 @section('item-navbar')
 	{{ Form::open(['class' => 'navbar-form navbar-right', 'id' => 'search', 'method' => 'POST', 'role' => 'search', 'route' => 'responce']) }}
 		<div class="form-group">
-			{{ Form::select('queue', $queue, 'all', array('class' => 'form-control')) }}
+			{{ Form::select('queue', array('all' => '-- All Queue --'), 'all', array('class' => 'form-control', 'id' => 'queue')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::select('queue_member', $queueMember, 'all', array('class' => 'form-control')) }}
+			{{ Form::select('queue_member', array('all' => '-- All Queue Memebers --'), 'all', array('class' => 'form-control', 'id' => 'queue_member')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::input('date', 'date_from', NULL, array('class' => 'form-control', 'placeholder' => getDay(), 'required')) }}
+			{{ Form::input('date', 'date_from', NULL, array('class' => 'form-control', 'id' => 'date_from', 'placeholder' => getDay(), 'required')) }}
 		</div>
 	    <div class="form-group">
-	    	{{ Form::input('date', 'date_to', NULL, array('class' => 'form-control', 'placeholder' => getDay(), 'required')) }}
+	    	{{ Form::input('date', 'date_to', NULL, array('class' => 'form-control', 'id' => 'date_to', 'placeholder' => getDay(), 'required')) }}
 	    </div>
-	    <button type="submit" class="btn btn-info">Buscar</button>
+	    <button type="submit" class="btn btn-info" id="btn">Buscar</button>
 	{{ Form::close() }}
+@endsection
+
+@section('app-script')
+	<!-- Table UI JavaScript -->
+	<script src="{{ asset('bootstrap-3.2.0/js/table-ui.js') }}"></script>
+	<!-- Start JavaScript -->
+	<script type="text/javascript">
+		
+		$(document).on('ready', start);
+
+		function start(){
+			$('#search').tableUI({
+				"url": "{{ route('queue-members') }}"
+			});
+		}
+
+	</script>
 @endsection

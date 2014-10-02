@@ -17,26 +17,6 @@ class ReportUIController extends BaseController {
 	*/
 
 	/**
-	 * @return \View
-	 */
-	public function showReportUI()
-	{
-		$queueRepo       = new ConfigQueueRepo();
-		$queueMemberRepo = new ConfigQueueMemberRepo();
-
-		$this->addParam([
-				'queue'            => array('all' => '-- All Queue --') + 
-								      $queueRepo->listNames(),
-				'queueMember'      => array('all' => '-- All Queue Members --') + 
-								      $queueMemberRepo->listNames(),
-				'queuesAndMembers' => $queueRepo->listQueuesAndMembers()
-			]);
-
-		return $this->show();
-
-	}
-
-	/**
 	 * @return \Response
 	 */
 	public function getReport()
@@ -51,6 +31,16 @@ class ReportUIController extends BaseController {
 		echo "</pre>";
 		dd();
 		return $this->showReportUI();
+	}
+
+	/**
+	 * @return json
+	 */
+	public function queueMembers()
+	{
+		$queueRepo = new ConfigQueueRepo();
+
+		return Response::json($queueRepo->listQueuesAndMembers());
 	}
 
 }
