@@ -28,9 +28,17 @@ class LogQueueRepo extends BaseRepo {
     {
         $ids = $this->entitie->callids('agent', $agent, $from, $to);
 
+        if (is_object($ids)) {
+            
+            unset($ids);
+
+            return (object) array();
+        }
+
         return $this->entitie
-                        ->callIn($ids)
-                        ->eventIn()
+                        ->calls($ids)
+                        ->events()
+                        ->date($from, $to)
                         ->get();
     }
 
@@ -41,9 +49,17 @@ class LogQueueRepo extends BaseRepo {
     {
         $ids = $this->entitie->callids('queuename', $queue, $from, $to);
 
+        if (is_object($ids)) {
+            
+            unset($ids);
+
+            return (object) array();
+        }
+
         return $this->entitie
-                        ->call$ids)
-                        ->event()
+                        ->calls($ids)
+                        ->events()
+                        ->date($from, $to)
                         ->get();
     }
 
@@ -52,22 +68,30 @@ class LogQueueRepo extends BaseRepo {
 	 */
 	public function logQueueAgent($queue, $agent, $from, $to)
 	{
-        $ids = $this->entitie->queue($queue)->callids('agent', $agent, $from, $to);
+        $ids = $this->entitie->queue($queue)->callids('agent', $agent, $from, $to)->get();
+
+        if (is_object($ids)) {
+            
+            unset($ids);
+
+            return (object) array();
+        }
 
 		return $this->entitie
-                        ->callIn($ids)
-                        ->eventIn()
+                        ->calls($ids)
+                        ->events()
+                        ->date($from, $to)
                         ->get();
 	}
 
     /**
      * @return
      */
-    public function logTime($from, $to)
+    public function logDate($from, $to)
     {
         return $this->entitie
-                        ->eventIn()
-                        ->dateBetween($from, $to)
+                        ->events()
+                        ->date($from, $to)
                         ->get();
     }
 

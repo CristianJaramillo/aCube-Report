@@ -36,9 +36,17 @@ class ReportUIResponce extends BaseResponce
 	}
 
 	/**
+	 * @return $this->date
+	 */
+	public function getResponse()
+	{
+		return $this->responce;
+	}
+
+	/**
 	 * @return ArrayObject
 	 */
-	public function getResponce()
+	public function setResponce()
 	{
 		return (object) array(
 				'error'   => array(),
@@ -73,34 +81,43 @@ class ReportUIResponce extends BaseResponce
 	 */
 	public function preparate()
 	{
-		if ($this->data['queue'] != 'all' && $this->data['queue_member'] != 'all') {
-			$success = $this->repository->logQueueAgent(
-					$this->data['queue'],
-					$this->data['queue_member'],
-					$this->data['date_from'], 
-					$this->data['date_to']
-				);
+
+		if ($this->data['queue'] == 'all' && $this->data['queue_member'] == 'all') {
+			
+			$message = 'Date';
+
+			$success = $this->repository->logDate(
+							$this->data['date_from'], 
+							$this->data['date_to']
+						);
+
+		} elseif ($this->data['queue'] != 'all' && $this->data['queue_member'] != 'all') {
+			
 			$message = 'QueueAndMemeber';
+
+			$success = $this->repository->logQueueAgent(
+							$this->data['queue'],
+							$this->data['queue_member'],
+							$this->data['date_from'], 
+							$this->data['date_to']
+						);
+			
 		} elseif ($this->data['queue'] != 'all') {
+		
+			$message = 'Queue';
+
 			$success = $this->repository->logQueue(
 					$this->data['queue'],
 					$this->data['date_from'], 
 					$this->data['date_to']
 				);
-			$message = 'Queue';
-		} elseif ($this->data['queue_member'] != 'all') {
-			$success = $this->repository->logAgent(
-					$this->data['queue_member'],
-					$this->data['date_from'], 
-					$this->data['date_to']
-				);
-			$message = 'Memeber';
+		
 		} else {
-			$success = $this->repository->logTime(
-					$this->data['date_from'], 
-					$this->data['date_to']
-				);
-			$message = 'Date';
+			
+			$message = 'Error';
+		
+			$success = (object) array('invalid' => 'option');
+
 		}
 
 		$this->addMessage($message);

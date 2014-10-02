@@ -40,14 +40,14 @@ abstract class BaseResponce
     {
         $this->repository   = $repository;
         $this->data     = array_only($data, array_keys($this->getRules()));
-		$this->responce = $this->getResponce();
+		$this->responce = $this->setResponce();
 		$this->rules    = $this->getRules();	
 	}
 
 	/**
 	 * @return ArrayObject
 	 */
-	abstract public function getResponce();
+	abstract public function setResponce();
 
 	/**
 	 * @return array

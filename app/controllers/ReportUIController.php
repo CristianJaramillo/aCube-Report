@@ -21,16 +21,11 @@ class ReportUIController extends BaseController {
 	 */
 	public function getReport()
 	{
-
 		$response = new ReportUIResponce(new LogQueueRepo(), Input::all());
 
 		$response->execute();
 
-		echo "<pre>";
-		print_r($response);
-		echo "</pre>";
-		dd();
-		return $this->showReportUI();
+		return Response::json($response->getResponse());
 	}
 
 	/**

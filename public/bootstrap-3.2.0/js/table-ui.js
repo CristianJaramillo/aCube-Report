@@ -29,13 +29,24 @@
 			if (el.selectQueue!=undefined) {	
 				el.selectQueue.on('change', setMember);
 			}
+			
+			$(el).submit(submitForm);
+
 		};
 
 		/**
 		 *
 		 */
 		var beforeQueue = function() {
-			console.log('before queue');
+			console.log('beforeQueue');
+		};
+
+		/**
+		 *
+		 */
+		var beforeReport = function() {
+			var tbody = $("#table-report tbody").empty();
+			console.log('beforeReport');
 		};
 
 		/**
@@ -44,6 +55,13 @@
 		var errorQueue = function() {
 			console.log('error queue');
 		};
+
+		/**
+		 *
+		 */
+		var errorReport = function() {
+			console.log('errorReport');
+		}
 
 		/**
 		 * Inicia el plugin.
@@ -126,6 +144,63 @@
 		};
 
 		/**
+		 *
+		 */
+		var showErrors = function (erros) {
+			console.log(erros);
+		};
+
+		/**
+		 *
+		 */
+		var showReport = function (report) {
+			
+			var tbody = $("#table-report tbody");
+
+			$.each(report, function(index, row) {
+				
+				if (!index) {
+					setTHead(row);	
+				};
+
+				var tr = $("<tr/>");
+
+				$.each(row, function(a, b){
+					tr.append("<td>" + b + "</td>");
+				});
+
+				tbody.append(tr);
+
+			});
+		};
+
+		var setTHead = function (row) {
+				
+			var thead = $("#table-report thead tr:first");
+
+			thead.empty();
+
+			$.each(row, function(a, b){
+				thead.append("<th>" + a + "</th>");
+			});
+		}
+
+		/**
+		 *
+		 */
+		var submitForm = function(event) {
+			
+			event.preventDefault();
+
+			settings.data = $(this).serialize();
+
+			settings.url = settings.url_responce;
+
+			loadData(beforeReport, errorReport, successReport);
+
+		};
+
+		/**
 		 * Agrega las colas al campo select
 		 */
 		var successQueue = function(json) {
@@ -135,6 +210,25 @@
 			});
 			
 			queuMembers = json;
+		};
+
+		/**
+		 *
+		 */
+		var successReport = function(json) {
+			
+			$.each(json, function(event, obj) {
+				if (typeof obj == "object") {
+					if (obj.length) {
+						if (event == 'error') {
+							showErrors(obj);
+						} else if (event == 'success') {
+							showReport(obj);
+						};
+					};
+				}
+			});
+			
 		};
 
 		init();

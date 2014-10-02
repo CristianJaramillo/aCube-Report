@@ -50,6 +50,9 @@ thead.info{
 .social-buttons{
   text-align: right;
 }
+.table-responsive{
+  max-height: 600px;
+}
 .twitter{
   background-image: url(../img/twitter.png);
 }
@@ -72,5 +75,11 @@ thead.info{
 @media screen and (min-width: 768px) and (max-width: 991px) {
   .social-buttons{
     margin-top: 34px;
+  }
+}
+
+@media screen and (min-width: 768px){
+  .table-responsive{
+    overflow: auto;
   }
 }

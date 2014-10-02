@@ -30,7 +30,7 @@ class LogQueue extends \Eloquent {
     public function scopeCallids($query, $column, $value, $from, $to)
     {
         return $query->where($column, $value)
-                     ->dateBetween($from, $to)
+                     ->date($from, $to)
                      ->groupBy('callid')
                      ->lists('callid');
     }
@@ -51,7 +51,7 @@ class LogQueue extends \Eloquent {
      * @param $to
      * @return $query
      */
-    public function scopeDateBetween($query, $from, $to)
+    public function scopeDate($query, $from, $to)
     {
         return $query->whereBetween('time', array(
                         $from.'  00:00:00',
