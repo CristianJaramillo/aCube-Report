@@ -1,6 +1,23 @@
+#dashboard {
+  margin-bottom: 0;
+}
+#dashboard li a {
+  background-color: #F8F8F8;
+  color: #716b7a;
+}
+#dashboard li a:hover {
+  background-color: #D8D9D8;
+  color: #444;
+}
+#dashboard li a:hover span.badge {
+  background-color: #49989E;
+}
+#message-error div.container{
+
+}
 .bg-black {
   color: #fff;
-  background-color: #222222;
+  background-color: #2F7378;
 }
 a.bg-black:hover {
   background-color: #444444;
@@ -12,14 +29,31 @@ a.bg-black:hover {
 	-moz-transition: all 1s ease;
 	-o-transition: all 1s ease;
 }
-tbody.info tr:hover {
-	background-color: #269abc;
+tbody.acube {
+  background-color: #FFFFFF;
+}
+tbody.acube tr:hover {
+	background-color: rgba(110, 172, 177, 0.9);
   border-color: #269abc;
 	color: #fff;
 	cursor: pointer;
 }
-thead.info{
+thead.acube{
 	background-color: #F8F8F8;
+}
+.btn-acube {
+  background-color: #49989E;
+  border-color: #2F7378;
+  color: #FFFFFF;
+}
+.btn-acube:hover,
+.btn-acube:focus,
+.btn-acube:active,
+.btn-acube.active,
+.open > .dropdown-toggle.btn-acube {
+  color: #fff;
+  background-color: #378E95;
+  border-color: #2F7378;
 }
 .facebook{
   background-image: url(../img/facebook.png);
@@ -28,7 +62,7 @@ thead.info{
   background-image: url(../img/facebook-hover.png);
 }
 .facebook, .google, .twitter, .youtube{
-  background-color: #000000;
+  background-color: transparent;
   background-position: 0px 0px;
   background-repeat: no-repeat;
   border-radius: 16px;
@@ -47,6 +81,29 @@ thead.info{
 .google:hover{
   background-image: url(../img/google-hover.png);
 }
+
+.panel-acube {
+  border-color: #E5E3E9;
+}
+.panel-acube > .panel-heading {
+  color: #FFF;
+  background-color: rgba(110, 172, 177, 1);
+  border-color: #E5E3E9;
+}
+.panel-acube > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #E5E3E9;
+}
+.panel-acube > .panel-heading .badge {
+  color: #62666F;
+  background-color: #fff;
+}
+.panel-acube > .panel-footer {
+  background-color: #E5E3E9;
+}
+.panel-acube > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #E5E3E9;
+}
+
 .social-buttons{
   text-align: right;
 }
@@ -81,5 +138,8 @@ thead.info{
 @media screen and (min-width: 768px){
   .table-responsive{
     overflow: auto;
+  }
+  #message-error div.container{
+    padding-right: 0px;
   }
 }

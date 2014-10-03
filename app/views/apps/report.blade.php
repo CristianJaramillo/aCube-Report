@@ -1,57 +1,105 @@
 @section('app')
 
+	<div class="row" id="message-error">
+		<div class="container">
+			<div class="col-xs-12 col-sm-12 col-md-12 alert alert-danger" role="alert">
+				<p>Mensaje de error</p>
+			</div>
+		</div>
+	</div>
+
 	<div class="row">
 	  	<div class="col-xs-12 col-sm-4 col-md-4">
-  			<nav class="navbar navbar-default" role="navigation">
-				<ul class="nav nav-pills nav-stacked" id="dashboard" role="tablist">
-					<li>
-				    	<a href="#">
-				      		<span class="badge pull-right">42</span>
-				      		Home
-				    	</a>
-				  	</li>
-					<li>
-					 	<a href="#">
-					   		<span class="badge pull-right">42</span>
-					   		Home
-					 	</a>
-					</li>
-					<li>
-					 	<a href="#">
-					   		<span class="badge pull-right">42</span>
-					   		Home
-					 	</a>
-					</li>
-					<li>
-					 	<a href="#">
-					   		<span class="badge pull-right">42</span>
-					   		Home
-					  	</a>
-					</li>
-				</ul>
-			</nav>
+	  		<div class="panel panel-acube">
+
+	  			<!-- Primary panel contents -->
+	 			 <div class="panel-heading">Llamadas</div>
+
+	  			<nav class="navbar navbar-default" id="dashboard" role="navigation">
+					<ul class="nav nav-pills nav-stacked" role="tablist">
+						<li>
+					    	<a class="ease" href="#">
+					      		<span class="badge pull-right" id="a">0</span>
+					      		Recibidas
+					    	</a>
+					  	</li>
+						<li>
+						 	<a class="ease" href="#">
+						   		<span class="badge pull-right" id="b">0</span>
+						   		Atendidas
+						 	</a>
+						</li>
+						<li>
+						 	<a class="ease" href="#">
+						   		<span class="badge pull-right" id="c">0</span>
+						   		Abandonadas
+						 	</a>
+						</li>
+						<li>
+						 	<a class="ease" href="#">
+						   		<span class="badge pull-right" id="d">0</span>
+						   		Completadas por Agente 
+						  	</a>
+						</li>
+						<li>
+						 	<a class="ease" href="#">
+						   		<span class="badge pull-right" id="e">0</span>
+						   		Completadas por Cliente 
+						  	</a>
+						</li>
+						<li>
+						 	<a class="ease" href="#">
+						   		<span class="badge pull-right" id="f">0</span>
+						   		Transferidas 
+						  	</a>
+						</li>
+					</ul>
+				</nav>
+				<!-- Default panel contents -->
+	 			<div class="panel-heading">Promedios de Tiempo</div>
+	 			<nav class="navbar navbar-default" id="dashboard" role="navigation">
+					<ul class="nav nav-pills nav-stacked" role="tablist">
+						<li>
+					    	<a class="ease" href="#">
+					      		<span class="badge pull-right" id="tClient">00:00:00</span>
+					      		Espera del Cliente
+					    	</a>
+					  	</li>
+					  	<li>
+					    	<a class="ease" href="#">
+					      		<span class="badge pull-right" id="tCall">00:00:00</span>
+					      		Duración LLamada
+					    	</a>
+					  	</li>
+					  	<li>
+					    	<a class="ease" href="#">
+					      		<span class="badge pull-right" id="tAbandon">00:00:00</span>
+					      		Espera de Abandono
+					    	</a>
+					  	</li>
+					</ul>
+				</nav>
+			</div>
   		</div>
   		
 	  	<div class="col-xs-12 col-sm-8 col-md-8">
 	  		<div class="row">
 	  			<div class="table-responsive">
-					<table class="ease table table-bordered" id="table-report">
-						<thead class="info">
+					<table class="ease table table-bordered table-hover" id="table-report">
+						<thead class="acube">
 							<tr>
-								<th>#</th>
-								<th>1</th>
-								<th>2</th>
-								<th>3</th>
-								<th>4</th>
+								<th>Fecha</th>
+								<th>Cola</th>
+								<th>Agente</th>
+								<th>Origen</th>
+								<th>Espera</th>
+								<th>Duraci&oacute;n</th>
+								<th>Finalizo</th>
 							</tr>
 						</thead>
-						<tbody class="ease info">
+						<tbody class="ease acube-no">
 							<tr>
-								<td> Date 1 </td>
-								<td> Date 2 </td>
-								<td> Date 3 </td>
-								<td> Date 4 </td>
-								<td> Date 5 </td>
+								<td colspan="7"><center>Tabla sin contenido!</center></td>
 							</tr>
 						</tbody>
 					</table>
@@ -62,7 +110,7 @@
 @endsection
 
 @section('item-navbar')
-	{{ Form::open(['class' => 'navbar-form navbar-right', 'id' => 'search', 'method' => 'GET', 'role' => 'form', 'route' => 'home']) }}
+	{{ Form::open(['class' => 'navbar-form navbar-right', 'id' => 'search', 'method' => 'POST', 'role' => 'form', 'route' => 'responce']) }}
 		<div class="form-group">
 			{{ Form::select('queue', array('all' => '-- All Queue --'), 'all', array('class' => 'form-control', 'id' => 'queue', 'required')) }}
 		</div>
@@ -76,7 +124,7 @@
 	    	{{ Form::input('date', 'date_to', NULL, array('class' => 'form-control', 'id' => 'date_to', 'placeholder' => getDay(), 'required')) }}
 	    </div>
 
-	    {{ Form::input('submit', 'btn', 'Buscar', array('class' => 'btn btn-info', 'id' => 'btn')) }}
+	    {{ Form::input('submit', 'btn', 'Buscar', array('class' => 'btn btn-acube ease', 'id' => 'btn')) }}
 
 	{{ Form::close() }}
 @endsection

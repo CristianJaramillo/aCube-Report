@@ -36,6 +36,93 @@ class ReportUIResponce extends BaseResponce
 	}
 
 	/**
+	 * @param  object $call
+	 * @return array  $array
+	 */
+	public function arrayEnvent($call)
+	{
+
+		$row = array();
+
+		switch ($call->event) {
+			
+			case 'ENTERQUEUE':
+				$row = [
+					'time' => $call->time,       // Hora de inicio.
+					'queue' => $call->queuename, // Cola de atención.
+					'phone' => $call->data2	     // Telefono
+				];
+
+			break;
+			
+			case 'CONNECT':
+				$row = [
+					'agent'    => $call->agent,
+					'waiting'  => $call->data1,
+					'duration' => "0",						
+				];
+			break;
+
+			case 'TRANSFER':
+				$row = [
+					'transfer' => $call->data1,
+					'waiting'  => $call->data3,
+					'duration' => $call->data4,
+				];
+			break;
+
+			case 'COMPLETECALLER':
+							
+				$row = [
+					'agent'   => $call->agent,
+					'waiting'  => $call->data1,
+					'duration' => $call->data2,						
+				];
+
+			break;
+
+			case 'COMPLETEAGENT':
+							
+				$row = [
+					'agent'    => $call->agent,
+					'waiting'  => $call->data1,
+					'duration' => $call->data2,						
+				];
+
+			break;
+
+			case 'EXITWITHTIMEOUT':
+							
+				$row = [
+					'status'   => "Tiempo maximo de espera en cola.",
+					'waiting'  => $call->data3,
+					'duration' => "0",						
+				];
+
+			break;
+
+			case 'EXITEMPTY':
+				$row = [
+					'status'   => "Finalizo no hay agentes disponibles.",
+					'waiting'  => $call->data3,
+					'duration' => "0",						
+				];
+			break;
+
+			case 'ABANDON':
+				$row = [
+					'status'   => "Abandono la Llamada",
+					'waiting'  => $call->data3,
+					'duration' => "0",
+				];
+			break;
+
+		}
+
+		return $row;
+	}
+
+	/**
 	 * @return $this->date
 	 */
 	public function getResponse()
@@ -67,6 +154,14 @@ class ReportUIResponce extends BaseResponce
 				'date_to'      => 'before:'.getDay(1).'|date_format:Y-m-d|required',
 			);
 	}	
+
+	/**
+	 * @return
+	 */
+	public function getSuccess()
+	{
+		return $this->responce->success;
+	}
 
 	/**
 	 * @return void
@@ -127,12 +222,25 @@ class ReportUIResponce extends BaseResponce
 	}
 
 	/**
-	 * @param $success
-	 * @return $success
+	 * @param  object $logQueues
+	 * @return array $success
 	 */
-	public function preparateSuccess($success)
+	public function preparateSuccess($logQueues)
 	{
+		$success = array();
+
+		foreach ($logQueues as $logQueue) {
+
+			if (!isset($success[$logQueue->callid])) {
+				$success[$logQueue->callid] = array();
+			}
+
+			$success[$logQueue->callid] += array($logQueue->event => $this->arrayEnvent($logQueue));
+
+		}
+
 		return $success;
+
 	}
 
 	/**
