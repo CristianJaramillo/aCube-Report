@@ -110,16 +110,16 @@
 @section('item-navbar')
 	{{ Form::open(['class' => 'navbar-form navbar-right', 'id' => 'search', 'method' => 'POST', 'role' => 'form', 'route' => 'responce']) }}
 		<div class="form-group">
-			{{ Form::select('queue', array('all' => '-- All Queue --'), 'all', array('class' => 'form-control', 'id' => 'queue', 'required')) }}
+			{{ Form::select('queue', array('all' => '-- All Queue --'), 'all', array('class' => 'form-control', 'id' => 'queue', 'required', 'title' => 'Queue')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::select('queue_member', array('all' => '-- All Queue Memebers --'), 'all', array('class' => 'form-control', 'id' => 'queue_member', 'required')) }}
+			{{ Form::select('queue_member', array('all' => '-- All Queue Memebers --'), 'all', array('class' => 'form-control', 'id' => 'queue_member', 'required', 'title' => 'Queue Member')) }}
 		</div>
 		<div class="form-group">
-			{{ Form::input('date', 'date_from', NULL, array('class' => 'form-control', 'id' => 'date_from', 'placeholder' => getDay(), 'required')) }}
+			{{ Form::input('date', 'date_from', NULL, array('class' => 'form-control', 'id' => 'date_from', 'placeholder' => getDay(), 'required', 'title' => 'Date From')) }}
 		</div>
 	    <div class="form-group">
-	    	{{ Form::input('date', 'date_to', NULL, array('class' => 'form-control', 'id' => 'date_to', 'placeholder' => getDay(), 'required')) }}
+	    	{{ Form::input('date', 'date_to', NULL, array('class' => 'form-control', 'id' => 'date_to', 'placeholder' => getDay(), 'required', 'title' => 'Date To')) }}
 	    </div>
 
 	    {{ Form::input('submit', 'btn', 'Buscar', array('class' => 'btn btn-acube ease', 'id' => 'btn')) }}

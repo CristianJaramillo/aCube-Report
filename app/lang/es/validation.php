@@ -31,6 +31,7 @@ return array(
 		"string"  => "El campo :attribute debe estar entre :min - :max caracteres.",
 	),
 	"confirmed"      => "El campo :attribute confirmación no coincide.",
+	"date_format"    => "El campo :attribute no tiene el formato :format.",
 	"different"      => "El campo :attribute and :other debe ser diferente.",
 	"email"          => "El formato del :attribute  es invalido.",
 	"exists"         => "El campo :attribute seleccionado es invalido.",
@@ -95,18 +96,10 @@ return array(
 	*/
 
 	'attributes' => array(
-		'category_id'    => 'categoría',
-		'departament_id' => 'departamento',
-        'email'       => 'correo electronico',
-        'email_confirmation'    => 'repita su correo electronico',
-        'full_name'   => 'nombre completo',
-        'first_last_name'   => 'apellido paterno',
-        'second_last_name'  => 'apellido materno',
-        'name'        => 'nombre',
-        'password'    => 'contraseña',
-        'password_confirmation' => 'repita su contraseña',
-        'remember'    => 'recordarme',
-		'username'    => 'usuario',
+		'queue' => 'cola',
+		'queue_member' => 'agente',
+		'date_from' => 'fecha desde',
+		'date_to' => 'fecha hasta',
 	),
 
 );
