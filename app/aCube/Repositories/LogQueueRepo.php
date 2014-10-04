@@ -49,18 +49,7 @@ class LogQueueRepo extends BaseRepo {
     {
         $ids = $this->entitie->callids('queuename', $queue, $from, $to);
 
-        if (is_object($ids)) {
-            
-            unset($ids);
-
-            return (object) array();
-        }
-
-        return $this->entitie
-                        ->calls($ids)
-                        ->events()
-                        ->date($from, $to)
-                        ->get();
+        return $this->logQueues($ids, $from, $to);
     }
 
     /**
@@ -70,19 +59,27 @@ class LogQueueRepo extends BaseRepo {
 	{
         $ids = $this->entitie->queue($queue)->callids('agent', $agent, $from, $to)->get();
 
-        if (is_object($ids)) {
-            
-            unset($ids);
+        return $this->logQueues($ids, $from, $to);
+    }
 
-            return (object) array();
-        }
-
-		return $this->entitie
+    /**
+     * @param  $ids
+     * @param  $from
+     * @param  $to
+     * @return
+     */
+    private function logQueues($ids, $from, $to)
+    {
+        if (is_array($ids) && !empty($ids)) {
+            return $this->entitie
                         ->calls($ids)
                         ->events()
                         ->date($from, $to)
                         ->get();
-	}
+        } else {
+            return (object) array();
+        }
+    }
 
     /**
      * @return

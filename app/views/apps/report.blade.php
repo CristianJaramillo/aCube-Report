@@ -83,28 +83,26 @@
   		</div>
   		
 	  	<div class="col-xs-12 col-sm-8 col-md-8">
-	  		<div class="row">
-	  			<div class="table-responsive">
-					<table class="ease table table-bordered table-hover" id="table-report">
-						<thead class="acube">
-							<tr>
-								<th>Fecha</th>
-								<th>Cola</th>
-								<th>Agente</th>
-								<th>Origen</th>
-								<th>Espera</th>
-								<th>Duraci&oacute;n</th>
-								<th>Finalizo</th>
-							</tr>
-						</thead>
-						<tbody class="ease acube-no">
-							<tr>
-								<td colspan="7"><center>Tabla sin contenido!</center></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-	  		</div>
+	  		<div class="table-responsive">
+				<table class="ease table table-bordered table-hover" id="table-report">
+					<thead class="acube">
+						<tr>
+							<th>Fecha</th>
+							<th>Cola</th>
+							<th>Agente</th>
+							<th>Origen</th>
+							<th>Espera</th>
+							<th>Duraci&oacute;n</th>
+							<th>Finalizo</th>
+						</tr>
+					</thead>
+					<tbody class="ease acube-no">
+						<tr>
+							<td colspan="7"><center>Tabla sin contenido!</center></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 	  	</div>
 	</div>
 @endsection

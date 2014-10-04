@@ -94,7 +94,6 @@ class ReportUIResponce extends BaseResponce
 			case 'EXITWITHTIMEOUT':
 							
 				$row = [
-					'status'   => "Tiempo maximo de espera en cola.",
 					'waiting'  => $call->data3,
 					'duration' => "0",						
 				];
@@ -103,7 +102,6 @@ class ReportUIResponce extends BaseResponce
 
 			case 'EXITEMPTY':
 				$row = [
-					'status'   => "Finalizo no hay agentes disponibles.",
 					'waiting'  => $call->data3,
 					'duration' => "0",						
 				];

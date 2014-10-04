@@ -220,6 +220,7 @@
 			var list = new Array(0, 0, 0, 0, 0, 0);
 			var prom = new Array(0, 0, 0);
 
+			console.log(report);
 
 			el.table.tbody.empty();
 
@@ -263,6 +264,7 @@
 							aux[6] = key;
 						break;
 
+						case 'EXITWITHTIMEOUT':
 						case 'ABANDON':
 							list[2]++;
 							aux[2] = 'NONE';
@@ -287,8 +289,11 @@
 							case 'COMPLETEAGENT':
 								aux[i] = '<center><button class="btn btn-success">'+aux[i]+'</button></center>';
 							break;
-							case 'ABANDON':
+							case 'EXITWITHTIMEOUT':
 								aux[i] = '<center><button class="btn btn-danger">'+aux[i]+'</button></center>';
+							break;
+							case 'ABANDON':
+								aux[i] = '<center><button class="btn btn-warning">'+aux[i]+'</button></center>';
 							break;
 						}
 					};

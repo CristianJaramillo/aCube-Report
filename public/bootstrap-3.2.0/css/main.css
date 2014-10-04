@@ -12,9 +12,6 @@
 #dashboard li a:hover span.badge {
   background-color: #49989E;
 }
-#message-error div.container{
-
-}
 .bg-black {
   color: #fff;
   background-color: #2F7378;
@@ -108,6 +105,8 @@ thead.acube{
   text-align: right;
 }
 .table-responsive{
+  border-bottom: 1px solid #DDD;
+  overflow: auto;
   max-height: 600px;
 }
 .twitter{
@@ -136,10 +135,5 @@ thead.acube{
 }
 
 @media screen and (min-width: 768px){
-  .table-responsive{
-    overflow: auto;
-  }
-  #message-error div.container{
-    padding-right: 0px;
-  }
+  
 }
