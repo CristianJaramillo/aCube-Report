@@ -18,8 +18,33 @@
 		// Canfiguraciones del usuario.
 		var settings = undefined;
 
-		// Queue and Member JSON
-		var queuMembers = undefined;
+		// logQueu JSON
+		var logQueu = undefined;
+
+		// Llamadas recibidas.
+		var enterqueue = 0;
+		
+		// Llamadas atendidas.
+		var connect = 0;
+		
+		// Llamadas abandonadas.
+		var abandon = 0;
+		
+		// Llamadas trasferidas.
+		var transfer = 0;
+		
+		// Llamadas terminadas por el cliente.
+		var completecaller = 0;
+
+		// Llamadas terminadas por el agente.
+		var completeagent = 0;
+
+		// Llamadas que exedieron el tiempo en cola.
+		var exitwithtimeout = 0;
+
+		// Llamadas sin agente disponible.
+		var exitempty = 0;
+
 
 		/**
 		 * Añade funciones a cada objeto.
@@ -179,7 +204,7 @@
 			el.selectQueueMember.append('<option value="all">-- All Queue Memebers --</option>');
 
 			if (queue != 'all') {
-				$.each(queuMembers, function(a, b){
+				$.each(logQueu, function(a, b){
 					if (a == queue) {
 						$.each(b, function(c, d){
 							el.selectQueueMember.append('<option value="' + d + '">' + d + '</option>');
@@ -207,6 +232,84 @@
 
 		};
 
+		var loadRows = function (index, row) {
+			// Nueva fila	
+			var tr = $("<tr/>", {"call":index});
+			
+			// Resumen de llamada.
+			var call = new Array(); 
+
+			$.each(row, function (key, value) {
+
+				switch (key) {
+					case "ENTERQUEUE":
+						call[0] = value.time;        // Fecha
+						call[1] = value.queue;       // Cola
+						call[3] = value.phone;       // Origen
+					break;
+					case "CONNECT":
+						call[2] = value.agent;       // Agente
+						if (call[4] == undefined) {
+							call[4] = value.waiting; // Espera
+						};
+					break;
+					case "TRANSFER":
+						if (call[4] == undefined) {
+							call[4] = value.waiting; // Espera
+						};
+						call[5] = value.duration;    // Duración
+					break;
+					case "COMPLETECALLER":
+						call[4] = value.waiting;     // Espera
+						call[5] = value.duration;    // Duración
+					break;
+					case "COMPLETEAGENT":
+						call[4] = value.waiting;     // Espera
+						call[5] = value.duration;    // Duración
+					break;
+					case "EXITWITHTIMEOUT":
+						if (call[4] == undefined) {
+							call[4] = value.waiting;  // Espera
+						};
+					break;
+					case "EXITEMPTY":
+						if (call[4] == undefined) {
+							call[4] = value.waiting;  // Espera
+						};
+					break;
+					case "ABANDON":
+						call[4] = value.waiting;      // Espera
+					break;
+				};
+
+				if (call[6] == undefined) {
+					call[6] = key;
+				};
+
+			});
+
+			if (call[2] == undefined) {
+				call[2] = "NONE";         // Agente
+			};
+			if (call[4] == undefined) {
+				call[4] = 0;              // Espera
+			};
+			if (call[5] == undefined) {
+				call[5] = 0;              // Espera
+			};
+
+			call[4] = time(parseInt(call[4]));
+			call[5] = time(parseInt(call[5]));
+			call[6] = status(call[6]);
+
+			for (var i = 0; i <= 6; i++) {
+				tr.append("<td>"+call[i]+"</td>");
+			};
+
+			// Agregamos la nueva fila
+			el.table.tbody.append(tr);
+		};
+
 		/**
 		 *
 		 */
@@ -220,92 +323,13 @@
 			var list = new Array(0, 0, 0, 0, 0, 0);
 			var prom = new Array(0, 0, 0);
 
-			console.log(report);
-
 			el.table.tbody.empty();
 
-			$.each(report, function(index, row) {
-				
-				tr = $("<tr/>");
+			console.log(report);
 
-				var aux = new Array();
+			$.each(report, loadRows);
 
-				$.each(row, function (key, values) {
-					
-					switch(key){
-						case "ENTERQUEUE":
-							list[0]++;
-							aux[0] = values.time;
-							aux[1] = values.queue;
-							aux[3] = values.phone;
-						break;
-							
-						case 'CONNECT':
-							list[1]++;
-							aux[2] = values.agent;
-							prom[0] += aux[4] = parseInt(values.waiting);
-						break;
-
-						case 'TRANSFER':
-							list[5]++;
-							prom[1] += aux[5] = parseInt(values.duration);
-							aux[6] = key;
-						break;
-							
-						case 'COMPLETECALLER':
-							list[4]++;
-							prom[1] += aux[5] = parseInt(values.duration);
-							aux[6] = key;
-						break;
-
-						case 'COMPLETEAGENT':
-							list[3]++;
-							prom[1] += aux[5] = parseInt(values.duration);
-							aux[6] = key;
-						break;
-
-						case 'EXITWITHTIMEOUT':
-						case 'ABANDON':
-							list[2]++;
-							aux[2] = 'NONE';
-							prom[2] += aux[4] = parseInt(values.waiting);
-							prom[1] += aux[5] = parseInt(values.duration);
-							aux[6] = key;
-						break;
-					};
-
-				});
-
-				for (i = 0; i < 7; i++) {
-					
-					if (i == 4 || i == 5) {
-						aux[i] = time(aux[i]);
-					}
-
-					if (i == 6) {
-						switch(aux[i]) {
-							case 'TRANSFER':
-							case 'COMPLETECALLER':
-							case 'COMPLETEAGENT':
-								aux[i] = '<center><button class="btn btn-success">'+aux[i]+'</button></center>';
-							break;
-							case 'EXITWITHTIMEOUT':
-								aux[i] = '<center><button class="btn btn-danger">'+aux[i]+'</button></center>';
-							break;
-							case 'ABANDON':
-								aux[i] = '<center><button class="btn btn-warning">'+aux[i]+'</button></center>';
-							break;
-						}
-					};
-
-					tr.append("<td>"+aux[i]+"</td>");
-				};
-
-
-				el.table.tbody.append(tr);
-
-			});
-
+			/*
 			$("#a").text(list[0]); // total de llamadas
 			$("#b").text(list[1]); // total de llamadas contestadas
 			$("#c").text(list[2]); // total de llamadas abandonadas
@@ -335,8 +359,43 @@
 			$("#tClient").text(prom[0]);
 			$("#tCall").text(prom[1]);
 			$("#tAbandon").text(prom[2]);
+			*/
 
 		};
+
+		/**
+		 *
+		 */
+		var status = function (status) {
+			
+			var style = "btn btn-";
+			
+			switch (status) {
+				case "ENTERQUEUE":
+					style += 'acube';
+				break;
+				case "CONNECT":
+					style += 'info';
+				break;
+				case "TRANSFER":
+				case "COMPLETECALLER":
+				case "COMPLETEAGENT":
+					style += 'success';
+				break;
+				case "EXITWITHTIMEOUT":
+				case "EXITEMPTY":
+					style += 'warning';
+				break;
+				case "ABANDON":
+					style += 'danger';
+				break;
+				default:
+					style += 'default';
+				break;	
+			};
+
+			return "<button class=\""+style+"\">"+status+"</button>";			
+		}
 
 		/**
 		 *
@@ -362,7 +421,7 @@
 				el.selectQueue.append('<option value="' + a + '">' + a + '</option>');
 			});
 			
-			queuMembers = json;
+			logQueu = json;
 		};
 
 		/**

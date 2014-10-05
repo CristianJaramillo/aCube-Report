@@ -36,6 +36,26 @@ class ReportUIResponce extends BaseResponce
 	}
 
 	/**
+	 * @return void
+	 */
+	public function addRules()
+	{
+		if (isset($this->data['queue']) && isset($this->data['queue_member'])) {
+			if ($this->data['queue'] != 'all' && $this->data['queue_member'] != 'all')
+			{
+				$this->rules['queue'] .= '|exists:config_queues,name';
+				$this->rules['queue_member'] .= '|exists:config_queue_members,membername'
+											 .'|exists:config_queue_members,membername,queue_name,'
+								      		 .$this->data['queue'];
+			} else if ($this->data['queue'] != 'all') {
+	        	$this->rules['queue'] .= '|exists:config_queues,name';	
+	        } else if ($this->data['queue_member'] != 'all') {
+	        	$this->rules['queue_member'] .= '|exists:config_queue_members,membername';
+	        }
+		}
+	}
+
+	/**
 	 * @param  object $call
 	 * @return array  $array
 	 */
@@ -58,8 +78,7 @@ class ReportUIResponce extends BaseResponce
 			case 'CONNECT':
 				$row = [
 					'agent'    => $call->agent,
-					'waiting'  => $call->data1,
-					'duration' => "0",						
+					'waiting'  => $call->data1,					
 				];
 			break;
 
@@ -94,24 +113,20 @@ class ReportUIResponce extends BaseResponce
 			case 'EXITWITHTIMEOUT':
 							
 				$row = [
-					'waiting'  => $call->data3,
-					'duration' => "0",						
+					'waiting'  => $call->data3,					
 				];
 
 			break;
 
 			case 'EXITEMPTY':
 				$row = [
-					'waiting'  => $call->data3,
-					'duration' => "0",						
+					'waiting'  => $call->data3,					
 				];
 			break;
 
 			case 'ABANDON':
 				$row = [
-					'status'   => "Abandono la Llamada",
 					'waiting'  => $call->data3,
-					'duration' => "0",
 				];
 			break;
 
@@ -247,19 +262,7 @@ class ReportUIResponce extends BaseResponce
 	public function valid()
 	{
 
-		if ($this->data['queue'] != 'all' && $this->data['queue_member'] != 'all')
-		{
-			$this->rules['queue_member'] .= '|exists:config_queue_members,membername,queue_name,'
-							      		 .$this->data['queue_member'];
-		} 
-
-		if ($this->data['queue'] != 'all') {
-        	$this->rules['queue'] .= '|exists:config_queues,name';	
-        }
-
-        if ($this->data['queue_member'] != 'all') {
-        	$this->rules['queue_member'] .= '|exists:config_queue_members,membername';
-        }
+		$this->addRules();
 
 		$validation = \Validator::make($this->data, $this->rules);
 

@@ -9,14 +9,21 @@
   background-color: #D8D9D8;
   color: #444;
 }
-#dashboard li a:hover span.badge {
-  background-color: #49989E;
-}
-.bg-black {
+thead.acube tr th,
+#dashboard li a:hover span.badge, 
+.bg-acube, .panel-acube > .panel-heading,
+.btn-acube {
   color: #fff;
-  background-color: #2F7378;
+  background: #356aa0; /* Old browsers */
+  background: -moz-linear-gradient(top,  #356aa0 0%, #356aa0 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#356aa0), color-stop(100%,#356aa0)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #356aa0 0%,#356aa0 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #356aa0 0%,#356aa0 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #356aa0 0%,#356aa0 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #356aa0 0%,#356aa0 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#356aa0',GradientType=0 ); /* IE6-9 */
 }
-a.bg-black:hover {
+a.bg-acube:hover {
   background-color: #444444;
 }
 .ease, tbody.ease tr{
@@ -29,19 +36,21 @@ a.bg-black:hover {
 tbody.acube {
   background-color: #FFFFFF;
 }
+tbody.acube tr td:last-child {
+  text-align: center;
+}
 tbody.acube tr:hover {
-	background-color: rgba(110, 172, 177, 0.9);
-  border-color: #269abc;
-	color: #fff;
 	cursor: pointer;
 }
 thead.acube{
 	background-color: #F8F8F8;
 }
-.btn-acube {
-  background-color: #49989E;
-  border-color: #2F7378;
+thead.acube tr th {
   color: #FFFFFF;
+  text-align: center;
+}
+.btn-acube {
+  border-color: #2F7378;
 }
 .btn-acube:hover,
 .btn-acube:focus,
@@ -49,7 +58,14 @@ thead.acube{
 .btn-acube.active,
 .open > .dropdown-toggle.btn-acube {
   color: #fff;
-  background-color: #378E95;
+  background: #4f85bb; /* Old browsers */
+  background: -moz-linear-gradient(top,  #4f85bb 0%, #4f85bb 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4f85bb), color-stop(100%,#4f85bb)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #4f85bb 0%,#4f85bb 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #4f85bb 0%,#4f85bb 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #4f85bb 0%,#4f85bb 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #4f85bb 0%,#4f85bb 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 ); /* IE6-9 */
   border-color: #2F7378;
 }
 .facebook{
@@ -78,13 +94,14 @@ thead.acube{
 .google:hover{
   background-image: url(../img/google-hover.png);
 }
-
+.navbar-default{
+  background-color: #F2F2F2;
+  border: 1px solid #C9C9C9;
+}
 .panel-acube {
   border-color: #E5E3E9;
 }
 .panel-acube > .panel-heading {
-  color: #FFF;
-  background-color: rgba(110, 172, 177, 1);
   border-color: #E5E3E9;
 }
 .panel-acube > .panel-heading + .panel-collapse > .panel-body {
@@ -105,9 +122,12 @@ thead.acube{
   text-align: right;
 }
 .table-responsive{
-  border-bottom: 1px solid #DDD;
   overflow: auto;
   max-height: 600px;
+}
+.table-responsive table.table {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #DDD;
 }
 .twitter{
   background-image: url(../img/twitter.png);
@@ -129,11 +149,24 @@ thead.acube{
 }
 
 @media screen and (min-width: 768px) and (max-width: 991px) {
+  .container {
+    width: 96%;
+  }
+  .navbar-form .form-group {
+    float: left;
+    margin-bottom: 5px;
+    width: 50%;
+  }
+  .navbar-form .form-control {
+    width: 90%;
+  }
   .social-buttons{
     margin-top: 34px;
   }
 }
 
 @media screen and (min-width: 768px){
-  
+  nav.navbar{
+    border-radius: 0px;
+  }
 }

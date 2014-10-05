@@ -15,7 +15,7 @@
 	  			<!-- Primary panel contents -->
 	 			 <div class="panel-heading">Llamadas</div>
 
-	  			<nav class="navbar navbar-default" id="dashboard" role="navigation">
+	  			<nav class="navbar navbar-acube" id="dashboard" role="navigation">
 					<ul class="nav nav-pills nav-stacked" role="tablist">
 						<li>
 					    	<a class="ease" href="#">
@@ -57,7 +57,7 @@
 				</nav>
 				<!-- Default panel contents -->
 	 			<div class="panel-heading">Promedios de Tiempo</div>
-	 			<nav class="navbar navbar-default" id="dashboard" role="navigation">
+	 			<nav class="navbar navbar-acube" id="dashboard" role="navigation">
 					<ul class="nav nav-pills nav-stacked" role="tablist">
 						<li>
 					    	<a class="ease" href="#">
@@ -96,7 +96,7 @@
 							<th>Finalizo</th>
 						</tr>
 					</thead>
-					<tbody class="ease acube-no">
+					<tbody class="ease acube">
 						<tr>
 							<td colspan="7"><center>Tabla sin contenido!</center></td>
 						</tr>

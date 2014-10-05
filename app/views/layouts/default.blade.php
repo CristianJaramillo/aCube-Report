@@ -25,7 +25,7 @@
   	</head>
   	<body>
     
-	    <header class="bg-black">
+	    <header class="bg-acube">
 	      <div class="container">
 	        <div class="row">
 	          <div class="col-sx-12 col-sm-9 col-lg-8">
@@ -46,17 +46,17 @@
 	    <nav class="navbar navbar-default" role="navigation">
 	      <div class="container">
 	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	            <span class="sr-only">Toggle navigation</span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>  
-	          </button>
-	          <a href="{{ route('home') }}" class="navbar-brand">Inicio</a>
+	        	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		        	<span class="sr-only">Toggle navigation</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>  
+		        </button>
+	          	<a href="{{ route('home') }}" class="navbar-brand">Inicio</a>
 	        </div>
-
-	        @yield('item-navbar')
-	        
+	        <div class="collapse navbar-collapse navbar-ex1-collapse">
+	        	@yield('item-navbar')
+	        </div>        
 	      </div>
 	    </nav>
 
