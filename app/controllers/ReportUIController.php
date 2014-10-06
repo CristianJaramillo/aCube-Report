@@ -24,14 +24,7 @@ class ReportUIController extends BaseController {
 		$response = new ReportUIResponce(new LogQueueRepo(), Input::all());
 
 		$response->execute();
-
-		/*
-		echo "<pre>";
-		print_r($response->getResponse());
-		echo "</pre>";
-
-		dd();
-		*/
+		
 		return Response::json($response->getResponse());
 	}
 

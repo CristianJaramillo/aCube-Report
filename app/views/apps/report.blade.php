@@ -55,10 +55,6 @@
 						</li>
 					</ul>
 				</nav>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-3">
-	  		<div class="panel panel-acube">
 				<!-- Default panel contents -->
 	 			<div class="panel-heading">Promedios de Tiempo</div>
 	 			<nav class="navbar navbar-acube dashboard" role="navigation">
@@ -86,20 +82,24 @@
 			</div>
 		</div>
 
-		<div class="col-xs-12 col-sm-12 col-md-6">
+		<div class="col-xs-12 col-sm-9 col-md-9">
 	  		<div class="panel panel-acube">
 				<div class="table-responsive">
-					<table class="table table-hover" id="table-description">
+					<table class="table table-hover table-acube" id="table-report">
 						<thead>
 							<tr>
-								<th>Estado</th>
+								<th>Fecha</th>
+								<th>Cola</th>
+								<th>Agente</th>
+								<th>Origen</th>
 								<th>Espera</th>
-								<th>Duración</th>
+								<th>Duraci&oacute;n</th>
+								<th>Finalizo</th>
 							</tr>
 						</thead>
-						<tbody class="ease table">
+						<tbody>
 							<tr>
-								<td colspan="3" style="text-align:center;">Tabla sin contenido</td>
+								<td colspan="7"><center>Tabla sin contenido!</center></td>
 							</tr>
 						</tbody>
 					</table>
@@ -109,23 +109,19 @@
   	</div>
   		
   	<div class="row">
-	  	<div class="col-xs-12 col-sm-12 col-md-12">
+	  	<div class="col-xs-12 col-sm-6 col-md-6">
 	  		<div class="table-responsive">
-				<table class="table table-hover table-acube" id="table-report">
+				<table class="table table-hover table-acube" id="table-description">
 					<thead>
 						<tr>
-							<th>Fecha</th>
-							<th>Cola</th>
-							<th>Agente</th>
-							<th>Origen</th>
+							<th>Estado</th>
 							<th>Espera</th>
-							<th>Duraci&oacute;n</th>
-							<th>Finalizo</th>
+							<th>Duración</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="ease table">
 						<tr>
-							<td colspan="7"><center>Tabla sin contenido!</center></td>
+							<td colspan="3" style="text-align:center;">Tabla sin contenido</td>
 						</tr>
 					</tbody>
 				</table>
@@ -141,6 +137,15 @@
 		</div>
 		<div class="form-group">
 			{{ Form::select('queue_member', array('all' => '-- All Queue Memebers --'), 'all', array('class' => 'form-control', 'id' => 'queue_member', 'required', 'title' => 'Queue Member')) }}
+		</div>
+		<div class="form-group">
+			{{ Form::select('event', array(
+					'all' => '-- All Events --',
+    	    		'TRANSFER' => 'TRANSFER',
+    	    		'COMPLETECALLER' => 'COMPLETECALLER',
+    	    		'COMPLETEAGENT' => 'COMPLETEAGENT',
+    	    		'ABANDON' => 'ABANDON',
+        		), 'all', array('class' => 'form-control', 'id' => 'event', 'required', 'title' => 'Event')) }}
 		</div>
 		<div class="form-group">
 			{{ Form::input('date', 'date_from', NULL, array('class' => 'form-control', 'id' => 'date_from', 'placeholder' => getDay(), 'required', 'title' => 'Date From')) }}

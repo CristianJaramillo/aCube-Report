@@ -54,10 +54,10 @@ class BaseController extends Controller {
     {
         return (object) array(
             'app'         => 'apps.report',
-            'description' => 'aCube - Beta',
+            'description' => 'aCube - Call Center',
             'lang'        => 'es',
             'layout'      => 'layouts.default',
-            'title'       => 'aCube - Beta',
+            'title'       => 'aCube - Call Center',
         );
     }
 

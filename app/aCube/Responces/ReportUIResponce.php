@@ -164,6 +164,7 @@ class ReportUIResponce extends BaseResponce
 		return array(
 				'queue'        => 'required',
 				'queue_member' => 'required',
+				'event'        => 'required',
 				'date_from'    => 'before:'.getDay(1).'|date_format:Y-m-d|required',
 				'date_to'      => 'before:'.getDay(1).'|date_format:Y-m-d|required',
 			);
@@ -191,13 +192,23 @@ class ReportUIResponce extends BaseResponce
 	public function preparate()
 	{
 
+		$events = array(
+					'TRANSFER',
+    	    		'COMPLETECALLER',
+    	    		'COMPLETEAGENT',
+    	    		'ABANDON',
+        		);
+
+		$this->data['event'] = in_array($this->data['event'], $events) ? $this->data['event'] : NULL;
+
 		if ($this->data['queue'] == 'all' && $this->data['queue_member'] == 'all') {
 			
 			$message = 'Date';
 
 			$success = $this->repository->logDate(
 							$this->data['date_from'], 
-							$this->data['date_to']
+							$this->data['date_to'],
+							$this->data['event']
 						);
 
 		} elseif ($this->data['queue'] != 'all' && $this->data['queue_member'] != 'all') {
@@ -208,7 +219,8 @@ class ReportUIResponce extends BaseResponce
 							$this->data['queue'],
 							$this->data['queue_member'],
 							$this->data['date_from'], 
-							$this->data['date_to']
+							$this->data['date_to'],
+							$this->data['event']
 						);
 			
 		} elseif ($this->data['queue'] != 'all') {
@@ -218,7 +230,8 @@ class ReportUIResponce extends BaseResponce
 			$success = $this->repository->logQueue(
 					$this->data['queue'],
 					$this->data['date_from'], 
-					$this->data['date_to']
+					$this->data['date_to'],
+					$this->data['event']
 				);
 		
 		} else {

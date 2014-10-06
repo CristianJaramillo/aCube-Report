@@ -1,7 +1,5 @@
-#table-report{
-  border: 1px solid #ddd;
-}
 #table-description{
+  border: 1px solid #ddd;
   max-height: 300px;
 }
 #table-description tbody tr td,
@@ -26,19 +24,20 @@ tbody.acube tr:hover,
   background-color: #D9EDF7;
   color: #3183B9;
 }
-thead.acube tr th,
+#table-description thead tr,
+#table-report thead tr,
 .dashboard li a:hover span.badge, 
 .bg-acube, .panel-acube > .panel-heading,
 .btn-acube {
-  color: #fff;
-  background: #356aa0; /* Old browsers */
-  background: -moz-linear-gradient(top,  #356aa0 0%, #356aa0 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#356aa0), color-stop(100%,#356aa0)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #356aa0 0%,#356aa0 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #356aa0 0%,#356aa0 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #356aa0 0%,#356aa0 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  #356aa0 0%,#356aa0 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#356aa0',GradientType=0 ); /* IE6-9 */
+  color: #FFFFFF;
+  background: #45484d; /* Old browsers */
+  background: -moz-linear-gradient(top,  #45484d 0%, #000000 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45484d), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #45484d 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #45484d 0%,#000000 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #45484d 0%,#000000 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #45484d 0%,#000000 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 }
 a.bg-acube:hover {
   background-color: #444444;
@@ -91,6 +90,12 @@ thead.acube tr th {
 .table-hover > tbody > tr.acube:hover > th {
   background-color: #4F85BB;
 }
+.title {
+  font-size: 24px;
+}
+.title img{
+  display: none;
+}
 .btn-acube {
   border-color: #2F7378;
 }
@@ -100,15 +105,7 @@ thead.acube tr th {
 .btn-acube.active,
 .open > .dropdown-toggle.btn-acube {
   color: #fff;
-  background: #4f85bb; /* Old browsers */
-  background: -moz-linear-gradient(top,  #4f85bb 0%, #4f85bb 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4f85bb), color-stop(100%,#4f85bb)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #4f85bb 0%,#4f85bb 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #4f85bb 0%,#4f85bb 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #4f85bb 0%,#4f85bb 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  #4f85bb 0%,#4f85bb 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 ); /* IE6-9 */
-  border-color: #2F7378;
+  background-color: #222;
 }
 .facebook{
   background-image: url(../img/facebook.png);
@@ -173,7 +170,7 @@ table.table-acube thead tr th {
 }
 .table-responsive{
   overflow: auto;
-  max-height: 600px;
+  max-height: 458px;
 }
 .table-responsive table.table {
   background-color: #FFFFFF;
@@ -283,7 +280,13 @@ table.table-acube thead tr th {
 
 @media screen and (min-width: 992px) {
   .social-buttons{
-    margin-top: 20px;
+    margin-top: 33.5px;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .btn-acube {
+    margin-top: 10px;
   }
 }
 
@@ -305,6 +308,9 @@ table.table-acube thead tr th {
 }
 
 @media screen and (min-width: 768px){
+  .title img{
+    display: inline-block;
+  }
   nav.navbar{
     border-radius: 0px;
   }

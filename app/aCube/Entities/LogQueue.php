@@ -57,15 +57,20 @@ class LogQueue extends \Eloquent {
                         $from.'  00:00:00',
                         $to.' 23:59:59'
                      )
-                )->orderBy('time', 'desc');
+                )->orderBy('id', 'desc')->orderBy('time', 'desc');
     }
 
     /**
      * @param $query
      * @return $query
      */
-    public function scopeEvents($query)
+    public function scopeEvents($query, $event = NULL)
     {
+
+        if (!is_null($event)) {
+            return $query->where('event', $event);
+        }
+
     	return $query->whereIn('event', array(
     	    		'ENTERQUEUE',
     	    		'CONNECT',

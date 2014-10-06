@@ -6,6 +6,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>@yield('title', 'aCube')</title>
 
+		<!-- Favicon .ico -->
+		<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
     	<!-- Bootstrap CSS -->
    		<link href="{{ asset('bootstrap-3.2.0/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -29,7 +32,7 @@
 	      <div class="container">
 	        <div class="row">
 	          <div class="col-sx-12 col-sm-9 col-lg-8">
-	            <h1 class="title">aCube - Beta</h1>
+	            <h2 class="title"><img src="{{ asset('bootstrap-3.2.0/img/logo.png') }}" alt="aCube"/> Reporteador Call Center</h2>
 	          </div>
 	          <div class="col-sx-12 col-sm-3 col-lg-4">
 	            <div class="social-buttons">

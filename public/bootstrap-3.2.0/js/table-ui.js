@@ -87,13 +87,14 @@
 			completecaller = 0;
 			completeagent  = 0;
 			transfer       = 0;
-			duration = 0;
+			duration       = 0;
 			waitingabandon = 0;
 			waitingconnect = 0;
 			el.msg.alert.empty();
 			el.msg.alert.hide();
 			el.table.tbody.empty();
 			el.table.tbody.append("<tr><td colspan=\"7\"><center>No se ha encontrado ningun registro!</center></td></tr>");
+			setDataDashboard();
 		};
 
 		/**
@@ -210,6 +211,29 @@
 					el.msg.alert.hide();
 				};
 			};
+
+		};
+
+		/**
+		 *
+		 */
+		var setDataDashboard = function() {
+			$("#a").text(enterqueue);     // total de llamadas
+			$("#b").text(connect);        // total de llamadas contestadas
+			$("#c").text(abandon);        // total de llamadas abandonadas
+			$("#d").text(completecaller); // total de llamadas finalizadas por el agente
+			$("#e").text(completeagent);  // total de llamadas finalizadas por el cliente
+			$("#f").text(transfer);       // total de llamadas trasferidas
+
+			var t1 = time(waitingconnect/(connect ? connect : 1));
+
+			var t2 = time(duration/((enterqueue-abandon) > 0 ? (enterqueue-abandon) : 1));
+
+			var t3 = time(waitingabandon/(abandon ? abandon : 1));
+
+			$("#tClient").text(t1);
+			$("#tCall").text(t2);
+			$("#tAbandon").text(t3);
 
 		};
 
@@ -337,6 +361,7 @@
 						};
 					break;
 					case "ABANDON":
+						console.log('ABANDON');
 						abandon++;
 						callSumary[4] = call.waiting;      // Espera
 					break;
@@ -392,20 +417,7 @@
 			// cargamos los registros a la tabla.
 			$.each(report, loadRows);
 
-			$("#a").text(enterqueue);     // total de llamadas
-			$("#b").text(connect);        // total de llamadas contestadas
-			$("#c").text(abandon);        // total de llamadas abandonadas
-			$("#d").text(completecaller); // total de llamadas finalizadas por el agente
-			$("#e").text(completeagent);  // total de llamadas finalizadas por el cliente
-			$("#f").text(transfer);       // total de llamadas trasferidas
-
-			abandon = abandon ? abandon : 1 ;
-			connect = connect ? connect : 1 ;
-			enterqueue = enterqueue ? enterqueue : 1 ;
-
-			$("#tClient").text(time(waitingconnect/connect));
-			$("#tCall").text(time(duration/(enterqueue-abandon)));
-			$("#tAbandon").text(time(waitingabandon/abandon));
+			setDataDashboard();
 
 			if (el.table.tbody.find('button.btn').length) {
 				el.table.tbody.find('button.btn').on('click', function(){

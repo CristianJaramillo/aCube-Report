@@ -24,10 +24,10 @@ class LogQueueRepo extends BaseRepo {
     /**
      * @return
      */
-    public function logAgent($agent, $from, $to)
+    public function logAgent($agent, $from, $to, $event = NULL)
     {
         $ids = $this->entitie
-                        ->events()
+                        ->events($event)
                         ->callids('agent', $agent, $from, $to);
 
         if (is_object($ids)) {
@@ -47,10 +47,10 @@ class LogQueueRepo extends BaseRepo {
     /**
      * @return
      */
-    public function logQueue($queue, $from, $to)
+    public function logQueue($queue, $from, $to, $event = NULL)
     {
         $ids = $this->entitie
-                        ->events()
+                        ->events($event)
                         ->callids('queuename', $queue, $from, $to);
 
         return $this->logQueues($ids, $from, $to);
@@ -59,10 +59,10 @@ class LogQueueRepo extends BaseRepo {
     /**
 	 * @return
 	 */
-	public function logQueueAgent($queue, $agent, $from, $to)
+	public function logQueueAgent($queue, $agent, $from, $to, $event = NULL)
 	{
         $ids = $this->entitie
-                        ->events()
+                        ->events($event)
                         ->queue($queue)
                         ->callids('agent', $agent, $from, $to);
 
@@ -75,12 +75,12 @@ class LogQueueRepo extends BaseRepo {
      * @param  $to
      * @return
      */
-    private function logQueues($ids, $from, $to)
+    private function logQueues($ids, $from, $to, $event = NULL)
     {
         if (is_array($ids) && !empty($ids)) {
             return $this->entitie
                         ->calls($ids)
-                        ->events()
+                        ->events($event)
                         ->date($from, $to)
                         ->get();
         } else {
@@ -91,10 +91,10 @@ class LogQueueRepo extends BaseRepo {
     /**
      * @return
      */
-    public function logDate($from, $to)
+    public function logDate($from, $to, $event = NULL)
     {
         return $this->entitie
-                        ->events()
+                        ->events($event)
                         ->date($from, $to)
                         ->get();
     }

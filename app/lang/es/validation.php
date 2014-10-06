@@ -100,6 +100,7 @@ return array(
 		'queue_member' => 'agente',
 		'date_from' => 'fecha desde',
 		'date_to' => 'fecha hasta',
+		'event' => 'evento',
 	),
 
 );
