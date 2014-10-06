@@ -18,8 +18,11 @@
 		// Canfiguraciones del usuario.
 		var settings = undefined;
 
-		// logQueu JSON
+		// logQueu JSON respaldo de colas y agentes.
 		var logQueu = undefined;
+
+		// Respaldo de reporte actual.
+		var logReport = undefined;
 
 		// Llamadas recibidas.
 		var enterqueue = 0;
@@ -45,6 +48,14 @@
 		// Llamadas sin agente disponible.
 		var exitempty = 0;
 
+		// Espera promedio del cliente.
+		var waitingconnect = 0;
+
+		// Duración promedio de llamada.
+		var duration = 0;
+
+		// Espera promedio de abandono.
+		var waitingabandon = 0;
 
 		/**
 		 * Añade funciones a cada objeto.
@@ -70,6 +81,15 @@
 		 *
 		 */
 		var beforeReport = function() {
+			enterqueue     = 0;
+			connect        = 0;
+			abandon        = 0;
+			completecaller = 0;
+			completeagent  = 0;
+			transfer       = 0;
+			duration = 0;
+			waitingabandon = 0;
+			waitingconnect = 0;
 			el.msg.alert.empty();
 			el.msg.alert.hide();
 			el.table.tbody.empty();
@@ -232,78 +252,126 @@
 
 		};
 
-		var loadRows = function (index, row) {
+		/**
+		 * @param callid
+		 * @param row
+		 * return void
+		 */
+		var loadRows = function (callid, row) {
 			// Nueva fila	
-			var tr = $("<tr/>", {"call":index});
+			var tr = $("<tr/>", {"callid":callid});
 			
 			// Resumen de llamada.
-			var call = new Array(); 
+			var callSumary = new Array(); 
 
-			$.each(row, function (key, value) {
+			// Eventos presentes
+			var size = row.length;
+			
+			// Agregamos la llamada a contador
+			enterqueue++;
 
-				switch (key) {
+			// Ultimo estado de llamada.
+			callSumary[6] = row[--size].event;
+
+			// Obtención de resumen de llamada.
+			$.each(row, function (index, call) {
+				switch (call.event) {
 					case "ENTERQUEUE":
-						call[0] = value.time;        // Fecha
-						call[1] = value.queue;       // Cola
-						call[3] = value.phone;       // Origen
+						if (callSumary[0] == undefined) {
+							callSumary[0] = call.time;    // Fecha
+						};
+						if (callSumary[1] == undefined) {
+							callSumary[1] = call.queue;    // Fecha
+						};
+						if (callSumary[3] == undefined) {
+							callSumary[3] = call.phone;    // Fecha
+						};
 					break;
 					case "CONNECT":
-						call[2] = value.agent;       // Agente
-						if (call[4] == undefined) {
-							call[4] = value.waiting; // Espera
+						connect++;
+						if (callSumary[2] == undefined) {
+							callSumary[2] = call.agent;   // Agente
+						};
+						if (callSumary[4] == undefined) {
+							callSumary[4] = call.waiting; // Espera
 						};
 					break;
 					case "TRANSFER":
-						if (call[4] == undefined) {
-							call[4] = value.waiting; // Espera
+						transfer++;
+						if (callSumary[2] == undefined) {
+							callSumary[2] = call.agent;   // Agente
 						};
-						call[5] = value.duration;    // Duración
+						if (callSumary[4] == undefined) {
+							callSumary[4] = call.waiting; // Espera
+						};
+						if (callSumary[5] == undefined) {
+							callSumary[5] = call.duration;// Duración
+						};
 					break;
 					case "COMPLETECALLER":
-						call[4] = value.waiting;     // Espera
-						call[5] = value.duration;    // Duración
+						completecaller++;
+						if (callSumary[2] == undefined) {
+							callSumary[2] = call.agent;   // Agente
+						};
+						callSumary[4] = call.waiting;     // Espera
+						callSumary[5] = call.duration;    // Duración
 					break;
 					case "COMPLETEAGENT":
-						call[4] = value.waiting;     // Espera
-						call[5] = value.duration;    // Duración
+						completeagent++;
+						if (callSumary[2] == undefined) {
+							callSumary[2] = call.agent;   // Agente
+						};
+						callSumary[4] = call.waiting;     // Espera
+						callSumary[5] = call.duration;    // Duración
 					break;
 					case "EXITWITHTIMEOUT":
-						if (call[4] == undefined) {
-							call[4] = value.waiting;  // Espera
+						exitwithtimeout++;
+						if (callSumary[4] == undefined) {
+							callSumary[4] = call.waiting;  // Espera
 						};
 					break;
 					case "EXITEMPTY":
-						if (call[4] == undefined) {
-							call[4] = value.waiting;  // Espera
+						exitempty++;
+						if (callSumary[4] == undefined) {
+							callSumary[4] = call.waiting;  // Espera
 						};
 					break;
 					case "ABANDON":
-						call[4] = value.waiting;      // Espera
+						abandon++;
+						callSumary[4] = call.waiting;      // Espera
 					break;
 				};
-
-				if (call[6] == undefined) {
-					call[6] = key;
-				};
-
 			});
 
-			if (call[2] == undefined) {
-				call[2] = "NONE";         // Agente
+			if (callSumary[2] == undefined) {
+				callSumary[2] = "NONE";         // Agente
 			};
-			if (call[4] == undefined) {
-				call[4] = 0;              // Espera
+			
+			if (callSumary[4] == undefined) {
+				callSumary[4] = 0;              // Espera
 			};
-			if (call[5] == undefined) {
-				call[5] = 0;              // Espera
+			
+			if (callSumary[5] == undefined) {
+				callSumary[5] = 0;              // Duración
 			};
 
-			call[4] = time(parseInt(call[4]));
-			call[5] = time(parseInt(call[5]));
-			call[6] = status(call[6]);
+			if (callSumary[6] == "ABANDON") {
+				waitingabandon += parseInt(callSumary[4]);
+			} else {
+				waitingconnect += parseInt(callSumary[4]);
+			}
 
-			for (var i = 0; i <= 6; i++) {
-				tr.append("<td>"+call[i]+"</td>");
+			duration += parseInt(callSumary[5]);
+
+
+			// Parseo de datos.
+			callSumary[4] = time(parseInt(callSumary[4]));
+			callSumary[5] = time(parseInt(callSumary[5]));
+			callSumary[6] = status(callSumary[6]);
+
+			// Agregamos las nuevas columnas
+			for (var i in callSumary) {
+				tr.append("<td>"+callSumary[i]+"</td>");
 			};
 
 			// Agregamos la nueva fila
@@ -319,47 +387,112 @@
 			var tr = undefined;
 			// Contador
 			var i = 0;
-
-			var list = new Array(0, 0, 0, 0, 0, 0);
-			var prom = new Array(0, 0, 0);
-
+			// Vaciamos la tabla.
 			el.table.tbody.empty();
-
-			console.log(report);
-
+			// cargamos los registros a la tabla.
 			$.each(report, loadRows);
 
-			/*
-			$("#a").text(list[0]); // total de llamadas
-			$("#b").text(list[1]); // total de llamadas contestadas
-			$("#c").text(list[2]); // total de llamadas abandonadas
-			$("#d").text(list[3]); // tatal de llamadas finalizadas por el agente
-			$("#e").text(list[4]); // tatal de llamadas finalizadas por el cliente
-			$("#f").text(list[5]); // tatal de llamadas trasferidas
+			$("#a").text(enterqueue);     // total de llamadas
+			$("#b").text(connect);        // total de llamadas contestadas
+			$("#c").text(abandon);        // total de llamadas abandonadas
+			$("#d").text(completecaller); // total de llamadas finalizadas por el agente
+			$("#e").text(completeagent);  // total de llamadas finalizadas por el cliente
+			$("#f").text(transfer);       // total de llamadas trasferidas
 
-			// Promedio de atencion
-			if (prom[0]>0 && list[1]>0) {
-				prom[0] = time(prom[0] / list[1]);
-			} else {
-				prom[0] = "00:00:00";
+			abandon = abandon ? abandon : 1 ;
+			connect = connect ? connect : 1 ;
+			enterqueue = enterqueue ? enterqueue : 1 ;
+
+			$("#tClient").text(time(waitingconnect/connect));
+			$("#tCall").text(time(duration/(enterqueue-abandon)));
+			$("#tAbandon").text(time(waitingabandon/abandon));
+
+			if (el.table.tbody.find('button.btn').length) {
+				el.table.tbody.find('button.btn').on('click', function(){
+
+					var callid = $(this).parent('td').parent('tr').attr('callid');
+
+					el.table.tbody.find('tr').removeClass('info');
+					$(this).parent('td').parent('tr').addClass('info');
+
+					var tbody = $("#table-description tbody");
+
+					tbody.empty();
+
+					$.each(logReport, function (id, logCall) {
+						if (id == callid) {
+							$.each(logCall, function (index, obj) {
+							
+								var tr = $("<tr/>");
+
+								var row = new Array(); 
+
+								switch (obj.event) {
+									case "ENTERQUEUE":
+										row[0] = "Fecha: " +
+												 obj.time +
+												 "<br/>Origen: "+
+												 obj.phone +
+												 "<br/>Cola de destino: " +
+												 obj.queue;
+									break;
+									case "CONNECT":
+										row[0] = "Atendido por el agente: " +
+												 obj.agent;
+										row[1] = obj.waiting;
+									break;
+									case "TRANSFER":
+										row[0] = "El agente: " + obj.agent + "<br/>Transfirio a " + obj.transfer;
+										row[1] = obj.waiting;
+										row[2] = obj.duration;
+									break;
+									case "COMPLETECALLER":
+										row[0] = "Finalizo llamada con el agente: " + obj.agent;
+										row[1] = obj.waiting;
+										row[2] = obj.duration;
+									break;
+									case "COMPLETEAGENT":
+										row[0] = "Finalizo llamada con el agente: " + obj.agent;
+										row[1] = obj.waiting;
+										row[2] = obj.duration;
+									break;
+									case "EXITWITHTIMEOUT":
+										row[0] = "Salio de cola, tiempo maximo de espera!";
+										row[1] = obj.waiting;
+									break;
+									case "EXITEMPTY":
+										row[0] = "Salio de cola, no hay agentes!";
+										row[1] = obj.waiting;
+									break;
+									case "ABANDON":
+										row[0] = "Abandono la llamada";
+										row[1] = obj.waiting;
+									break;	
+								};
+
+								if (row[1]==undefined) {
+									row[1] = 0;
+								};
+
+								if (row[2]==undefined) {
+									row[2] = 0;
+								};
+
+								row[1] = time(parseInt(row[1]));
+								row[2] = time(parseInt(row[2]));
+
+								for (var i in row) {
+									tr.append("<td>"+row[i]+"</td>");
+								};
+
+								tbody.append(tr);
+
+							});
+						};
+					});
+
+				});
 			};
-
-			if (prom[1]>0 && (list[3] + list[4] + list[5])>0) {
-				prom[1] = time(prom[1] / (list[3] + list[4] + list[5]));
-			} else {
-				prom[1] = "00:00:00";
-			};
-
-			if (prom[2]>0 && list[2]>0) {
-				prom[2] = time(prom[2] / list[2]);
-			} else {
-				prom[2] = "00:00:00";
-			};
-
-			$("#tClient").text(prom[0]);
-			$("#tCall").text(prom[1]);
-			$("#tAbandon").text(prom[2]);
-			*/
 
 		};
 
@@ -433,6 +566,7 @@
 					showErrors(obj);
 				} else if (event == 'success' && obj != 0) {
 					showReport(obj);
+					logReport = obj;
 				};
 			});
 		};

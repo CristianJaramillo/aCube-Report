@@ -9,13 +9,13 @@
 	</div>
 
 	<div class="row">
-	  	<div class="col-xs-12 col-sm-4 col-md-4">
+	  	<div class="col-xs-12 col-sm-6 col-md-3">
 	  		<div class="panel panel-acube">
 
 	  			<!-- Primary panel contents -->
-	 			 <div class="panel-heading">Llamadas</div>
+	 			<div class="panel-heading">Llamadas</div>
 
-	  			<nav class="navbar navbar-acube" id="dashboard" role="navigation">
+	  			<nav class="navbar navbar-acube dashboard" role="navigation">
 					<ul class="nav nav-pills nav-stacked" role="tablist">
 						<li>
 					    	<a class="ease" href="#">
@@ -38,13 +38,13 @@
 						<li>
 						 	<a class="ease" href="#">
 						   		<span class="badge pull-right" id="d">0</span>
-						   		Completadas por Agente 
+						   		Finalizada por el Cliente 
 						  	</a>
 						</li>
 						<li>
 						 	<a class="ease" href="#">
 						   		<span class="badge pull-right" id="e">0</span>
-						   		Completadas por Cliente 
+						   		Finalizada por el Agente 
 						  	</a>
 						</li>
 						<li>
@@ -55,9 +55,13 @@
 						</li>
 					</ul>
 				</nav>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-3">
+	  		<div class="panel panel-acube">
 				<!-- Default panel contents -->
 	 			<div class="panel-heading">Promedios de Tiempo</div>
-	 			<nav class="navbar navbar-acube" id="dashboard" role="navigation">
+	 			<nav class="navbar navbar-acube dashboard" role="navigation">
 					<ul class="nav nav-pills nav-stacked" role="tablist">
 						<li>
 					    	<a class="ease" href="#">
@@ -68,7 +72,7 @@
 					  	<li>
 					    	<a class="ease" href="#">
 					      		<span class="badge pull-right" id="tCall">00:00:00</span>
-					      		Duración LLamada
+					      		Duración Llamada
 					    	</a>
 					  	</li>
 					  	<li>
@@ -80,12 +84,37 @@
 					</ul>
 				</nav>
 			</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-12 col-md-6">
+	  		<div class="panel panel-acube">
+				<div class="table-responsive">
+					<table class="table table-hover" id="table-description">
+						<thead>
+							<tr>
+								<th>status</th>
+								<th>waiting</th>
+								<th>duration</th>
+							</tr>
+						</thead>
+						<tbody class="ease table">
+							<tr>
+								<td>NONE</td>
+								<td>NONE</td>
+								<td>NONE</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
   		</div>
+  	</div>
   		
-	  	<div class="col-xs-12 col-sm-8 col-md-8">
+  	<div class="row">
+	  	<div class="col-xs-12 col-sm-12 col-md-12">
 	  		<div class="table-responsive">
-				<table class="ease table table-bordered table-hover" id="table-report">
-					<thead class="acube">
+				<table class="table table-hover table-acube" id="table-report">
+					<thead>
 						<tr>
 							<th>Fecha</th>
 							<th>Cola</th>
@@ -96,7 +125,7 @@
 							<th>Finalizo</th>
 						</tr>
 					</thead>
-					<tbody class="ease acube">
+					<tbody>
 						<tr>
 							<td colspan="7"><center>Tabla sin contenido!</center></td>
 						</tr>

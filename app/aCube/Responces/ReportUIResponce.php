@@ -84,6 +84,7 @@ class ReportUIResponce extends BaseResponce
 
 			case 'TRANSFER':
 				$row = [
+					'agent'    => $call->agent,
 					'transfer' => $call->data1,
 					'waiting'  => $call->data3,
 					'duration' => $call->data4,
@@ -132,7 +133,7 @@ class ReportUIResponce extends BaseResponce
 
 		}
 
-		return $row;
+		return $row + ['event' => $call->event];
 	}
 
 	/**
@@ -242,13 +243,14 @@ class ReportUIResponce extends BaseResponce
 	{
 		$success = array();
 
+		// Recorre todos los registros obtenidos
 		foreach ($logQueues as $logQueue) {
 
 			if (!isset($success[$logQueue->callid])) {
 				$success[$logQueue->callid] = array();
 			}
 
-			$success[$logQueue->callid] += array($logQueue->event => $this->arrayEnvent($logQueue));
+			array_unshift($success[$logQueue->callid], $this->arrayEnvent($logQueue));
 
 		}
 

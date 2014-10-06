@@ -1,16 +1,32 @@
-#dashboard {
+#table-report{
+  border: 1px solid #ddd;
+}
+#table-description{
+  max-height: 300px;
+}
+#table-description tbody tr td,
+#table-description thead tr th,
+#table-report thead tr th{
+  text-align: center;
+}
+#table-description tbody tr td:first-child {
+  text-align: left;
+}
+.dashboard {
   margin-bottom: 0;
 }
-#dashboard li a {
-  background-color: #F8F8F8;
+.dashboard li a {
+  background-color: transparent;
+  border-radius: 0px;
   color: #716b7a;
 }
-#dashboard li a:hover {
-  background-color: #D8D9D8;
-  color: #444;
+tbody.acube tr:hover,
+.dashboard li a:hover {
+  background-color: #D9EDF7;
+  color: #3183B9;
 }
 thead.acube tr th,
-#dashboard li a:hover span.badge, 
+.dashboard li a:hover span.badge, 
 .bg-acube, .panel-acube > .panel-heading,
 .btn-acube {
   color: #fff;
@@ -36,7 +52,10 @@ a.bg-acube:hover {
 tbody.acube {
   background-color: #FFFFFF;
 }
-tbody.acube tr td:last-child {
+tbody.acube tr:nth-child(odd){
+  background: #EBEBEB;
+}
+tbody.acube tr td{
   text-align: center;
 }
 tbody.acube tr:hover {
@@ -98,6 +117,10 @@ thead.acube tr th {
   background-color: #F2F2F2;
   border: 1px solid #C9C9C9;
 }
+.navbar-acube{
+  min-height: 0;
+  border: 0px;
+}
 .panel-acube {
   border-color: #E5E3E9;
 }
@@ -120,6 +143,10 @@ thead.acube tr th {
 
 .social-buttons{
   text-align: right;
+}
+table.table-acube tbody tr td,
+table.table-acube thead tr th {
+  text-align: center;
 }
 .table-responsive{
   overflow: auto;

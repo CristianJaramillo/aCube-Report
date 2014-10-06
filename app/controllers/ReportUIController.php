@@ -25,6 +25,13 @@ class ReportUIController extends BaseController {
 
 		$response->execute();
 
+		/*
+		echo "<pre>";
+		print_r($response->getResponse());
+		echo "</pre>";
+
+		dd();
+		*/
 		return Response::json($response->getResponse());
 	}
 

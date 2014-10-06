@@ -26,7 +26,9 @@ class LogQueueRepo extends BaseRepo {
      */
     public function logAgent($agent, $from, $to)
     {
-        $ids = $this->entitie->callids('agent', $agent, $from, $to);
+        $ids = $this->entitie
+                        ->events()
+                        ->callids('agent', $agent, $from, $to);
 
         if (is_object($ids)) {
             
@@ -47,7 +49,9 @@ class LogQueueRepo extends BaseRepo {
      */
     public function logQueue($queue, $from, $to)
     {
-        $ids = $this->entitie->callids('queuename', $queue, $from, $to);
+        $ids = $this->entitie
+                        ->events()
+                        ->callids('queuename', $queue, $from, $to);
 
         return $this->logQueues($ids, $from, $to);
     }
@@ -57,7 +61,10 @@ class LogQueueRepo extends BaseRepo {
 	 */
 	public function logQueueAgent($queue, $agent, $from, $to)
 	{
-        $ids = $this->entitie->queue($queue)->callids('agent', $agent, $from, $to)->get();
+        $ids = $this->entitie
+                        ->events()
+                        ->queue($queue)
+                        ->callids('agent', $agent, $from, $to);
 
         return $this->logQueues($ids, $from, $to);
     }
