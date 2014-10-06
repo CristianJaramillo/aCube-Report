@@ -416,7 +416,7 @@
 					// .replace('e', 'E')
 					var style = $(this).attr('class').replace('btn btn-', '');
 
-					if (style=='acube') {style='info';};
+					// if (style=='acube') {style='info';};
 
 					el.table.tbody.find('tr').removeAttr('class');
 					$(this).parent('td').parent('tr').addClass(style);

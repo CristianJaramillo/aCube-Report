@@ -69,6 +69,28 @@ thead.acube tr th {
   color: #FFFFFF;
   text-align: center;
 }
+.table > thead > tr > td.acube,
+.table > tbody > tr > td.acube,
+.table > tfoot > tr > td.acube,
+.table > thead > tr > th.acube,
+.table > tbody > tr > th.acube,
+.table > tfoot > tr > th.acube,
+.table > thead > tr.acube > td,
+.table > tbody > tr.acube > td,
+.table > tfoot > tr.acube > td,
+.table > thead > tr.acube > th,
+.table > tbody > tr.acube > th,
+.table > tfoot > tr.acube > th {
+  background-color: #799dc4;
+  color: #fff;
+}
+.table-hover > tbody > tr > td.acube:hover,
+.table-hover > tbody > tr > th.acube:hover,
+.table-hover > tbody > tr.acube:hover > td,
+.table-hover > tbody > tr:hover > .acube,
+.table-hover > tbody > tr.acube:hover > th {
+  background-color: #4F85BB;
+}
 .btn-acube {
   border-color: #2F7378;
 }
