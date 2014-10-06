@@ -412,8 +412,14 @@
 
 					var callid = $(this).parent('td').parent('tr').attr('callid');
 
-					el.table.tbody.find('tr').removeClass('info');
-					$(this).parent('td').parent('tr').addClass('info');
+
+					// .replace('e', 'E')
+					var style = $(this).attr('class').replace('btn btn-', '');
+
+					if (style=='acube') {style='info';};
+
+					el.table.tbody.find('tr').removeAttr('class');
+					$(this).parent('td').parent('tr').addClass(style);
 
 					var tbody = $("#table-description tbody");
 

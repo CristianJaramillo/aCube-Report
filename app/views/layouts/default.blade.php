@@ -23,7 +23,7 @@
       	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     	<![endif]-->
   	</head>
-  	<body>
+  	<body id="wrapper">
     
 	    <header class="bg-acube">
 	      <div class="container">

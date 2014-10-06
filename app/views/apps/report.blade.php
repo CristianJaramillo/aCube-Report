@@ -92,16 +92,14 @@
 					<table class="table table-hover" id="table-description">
 						<thead>
 							<tr>
-								<th>status</th>
-								<th>waiting</th>
-								<th>duration</th>
+								<th>Estado</th>
+								<th>Espera</th>
+								<th>Duración</th>
 							</tr>
 						</thead>
 						<tbody class="ease table">
 							<tr>
-								<td>NONE</td>
-								<td>NONE</td>
-								<td>NONE</td>
+								<td colspan="3" style="text-align:center;">Tabla sin contenido</td>
 							</tr>
 						</tbody>
 					</table>
@@ -157,6 +155,8 @@
 @endsection
 
 @section('app-script')
+	<!-- Start UI JavaScript -->
+	<script src="{{ asset('bootstrap-3.2.0/js/start.js') }}"></script>
 	<!-- Table UI JavaScript -->
 	<script src="{{ asset('bootstrap-3.2.0/js/table-ui.js') }}"></script>
 	<!-- Start JavaScript -->
@@ -165,6 +165,11 @@
 		$(document).on('ready', start);
 
 		function start(){
+
+			$('#wrapper').startUX({
+				"modal": true
+			});
+
 			$('#search').tableUI({
 				"url_responce": "{{ route('responce') }}",
 				"url"     : "{{ route('queue-members') }}"
