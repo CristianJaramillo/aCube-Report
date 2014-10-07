@@ -38,13 +38,13 @@
 						<li>
 						 	<a class="ease" href="#">
 						   		<span class="badge pull-right" id="d">0</span>
-						   		Finalizada por el Cliente 
+						   		Finalizadas por el Cliente 
 						  	</a>
 						</li>
 						<li>
 						 	<a class="ease" href="#">
 						   		<span class="badge pull-right" id="e">0</span>
-						   		Finalizada por el Agente 
+						   		Finalizadas por el Agente 
 						  	</a>
 						</li>
 						<li>
@@ -55,79 +55,97 @@
 						</li>
 					</ul>
 				</nav>
-				<!-- Default panel contents -->
-	 			<div class="panel-heading">Promedios de Tiempo</div>
-	 			<nav class="navbar navbar-acube dashboard" role="navigation">
-					<ul class="nav nav-pills nav-stacked" role="tablist">
-						<li>
-					    	<a class="ease" href="#">
-					      		<span class="badge pull-right" id="tClient">00:00:00</span>
-					      		Espera del Cliente
-					    	</a>
-					  	</li>
-					  	<li>
-					    	<a class="ease" href="#">
-					      		<span class="badge pull-right" id="tCall">00:00:00</span>
-					      		Duración Llamada
-					    	</a>
-					  	</li>
-					  	<li>
-					    	<a class="ease" href="#">
-					      		<span class="badge pull-right" id="tAbandon">00:00:00</span>
-					      		Espera de Abandono
-					    	</a>
-					  	</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-
-		<div class="col-xs-12 col-sm-12 col-md-9">
-	  		<div class="panel panel-acube">
 				<div class="table-responsive">
-					<table class="table table-hover table-acube" id="table-report">
+					<table class="table table-hover table-acube" id="table-description">
 						<thead>
 							<tr>
-								<th>Fecha</th>
-								<th>Cola</th>
-								<th>Agente</th>
-								<th>Origen</th>
+								<th>Estado</th>
 								<th>Espera</th>
-								<th>Duraci&oacute;n</th>
-								<th>Finalizo</th>
+								<th>Duración</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class="ease table">
 							<tr>
-								<td colspan="7"><center>Tabla sin contenido!</center></td>
+								<td colspan="3" style="text-align:center;">Tabla sin contenido</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-12 col-md-9">
+			<div class="row-fluid">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="panel panel-acube">
+						<!-- Default panel contents -->
+			 			<div class="panel-heading">Promedios de Tiempo</div>
+			 			<nav class="navbar navbar-acube dashboard" role="navigation">
+							<ul class="nav nav-pills nav-stacked" role="tablist">
+								<li>
+							    	<a class="ease" href="#">
+							      		<span class="badge pull-right" id="tClient">00:00:00</span>
+							      		Espera del Cliente
+							    	</a>
+							  	</li>
+							  	<li>
+							    	<a class="ease" href="#">
+							      		<span class="badge pull-right" id="tCall">00:00:00</span>
+							      		Duración Llamada
+							    	</a>
+							  	</li>
+							  	<li>
+							    	<a class="ease" href="#">
+							      		<span class="badge pull-right" id="tAbandon">00:00:00</span>
+							      		Espera de Abandono
+							    	</a>
+							  	</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<!--div class="panel panel-acube"-->
+						<!-- Primary panel contents -->
+			 			<!--div class="panel-heading">Audio de llamada</div>
+			 			<div class="panel-body">
+			 				<ul class="nav nav-pills nav-stacked" role="tablist">
+			 					<li>
+			 						<audio class="center-block" id="complete-recoding" src="audio.mp3" preload="auto" controls></audio>
+			 					</li>
+			 				</ul>
+			 			</div>
+					</div-->
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<div class="panel panel-acube">
+						<div class="table-responsive">
+							<table class="table table-hover table-acube" id="table-report">
+								<thead>
+									<tr>
+										<th>Fecha</th>
+										<th>Cola</th>
+										<th>Agente</th>
+										<th>Origen</th>
+										<th>Espera</th>
+										<th>Duraci&oacute;n</th>
+										<th>Finalizo</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="7"><center>Tabla sin contenido!</center></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>	
+				</div>
+			</div>
   		</div>
   	</div>
-  		
-  	<div class="row">
-	  	<div class="col-xs-12 col-sm-6 col-md-6">
-	  		<div class="table-responsive">
-				<table class="table table-hover table-acube" id="table-description">
-					<thead>
-						<tr>
-							<th>Estado</th>
-							<th>Espera</th>
-							<th>Duración</th>
-						</tr>
-					</thead>
-					<tbody class="ease table">
-						<tr>
-							<td colspan="3" style="text-align:center;">Tabla sin contenido</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-	  	</div>
-	</div>
 @endsection
 
 @section('item-navbar')
@@ -142,8 +160,7 @@
 			{{ Form::select('event', array(
 					'all' => '-- All Events --',
     	    		'TRANSFER' => 'TRANSFER',
-    	    		'COMPLETECALLER' => 'COMPLETECALLER',
-    	    		'COMPLETEAGENT' => 'COMPLETEAGENT',
+    	    		'COMPLETECALL' => 'COMPLETECALL',
     	    		'ABANDON' => 'ABANDON',
         		), 'all', array('class' => 'form-control', 'id' => 'event', 'required', 'title' => 'Event')) }}
 		</div>

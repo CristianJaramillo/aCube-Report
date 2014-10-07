@@ -141,7 +141,7 @@ class ReportUIResponce extends BaseResponce
 	 */
 	public function getResponse()
 	{
-		return $this->responce;
+		return \Response::json($this->responce);
 	}
 
 	/**
@@ -164,7 +164,7 @@ class ReportUIResponce extends BaseResponce
 		return array(
 				'queue'        => 'required',
 				'queue_member' => 'required',
-				'event'        => 'in:all,ABANDON,COMPLETEAGENT,COMPLETECALLER,TRANSFER|required',
+				'event'        => 'in:all,ABANDON,COMPLETECALL,TRANSFER|required',
 				'date_from'    => 'before:'.getDay(1).'|date_format:Y-m-d|required',
 				'date_to'      => 'before:'.getDay(1).'|date_format:Y-m-d|required',
 			);

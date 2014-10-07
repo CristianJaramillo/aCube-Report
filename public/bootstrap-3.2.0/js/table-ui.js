@@ -363,7 +363,6 @@
 						};
 					break;
 					case "ABANDON":
-						console.log('ABANDON');
 						abandon++;
 						callSumary[4] = call.waiting;      // Espera
 					break;
@@ -501,6 +500,15 @@
 								row[1] = time(parseInt(row[1]));
 								row[2] = time(parseInt(row[2]));
 
+								if (obj.event=="ENTERQUEUE") {
+									row[1] = '';
+									row[2] = '';
+								};
+
+								if (obj.event=="CONNECT") {
+									row[2] = '';
+								};
+
 								for (var i in row) {
 									tr.append("<td>"+row[i]+"</td>");
 								};
@@ -535,6 +543,7 @@
 				break;
 				case "COMPLETECALLER":
 				case "COMPLETEAGENT":
+					status = "COMPLETECALL";
 					style += 'success';
 				break;
 				case "EXITWITHTIMEOUT":

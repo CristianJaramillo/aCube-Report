@@ -1,6 +1,7 @@
 #table-description{
   border: 1px solid #ddd;
   max-height: 300px;
+  min-width: 400px;
 }
 #table-description tbody tr td,
 #table-description thead tr th,
@@ -165,6 +166,9 @@ thead.acube tr th {
 }
 .panel-acube {
   border-color: #E5E3E9;
+}
+.panel-acube audio {
+  margin: 0 auto;
 }
 .panel-acube > .panel-heading {
   border-color: #E5E3E9;

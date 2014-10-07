@@ -17,6 +17,16 @@ class ReportUIController extends BaseController {
 	*/
 
 	/**
+	 * @return \Responce
+	 */
+	public function getRecoding($file)
+	{
+		$responce = new RecodingResponce($file);
+
+		return $responce->getResponse();
+	}
+
+	/**
 	 * @return \Response
 	 */
 	public function getReport()
@@ -25,7 +35,7 @@ class ReportUIController extends BaseController {
 
 		$response->execute();
 		
-		return Response::json($response->getResponse());
+		return $response->getResponse();
 	}
 
 	/**

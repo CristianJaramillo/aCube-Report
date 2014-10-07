@@ -9,7 +9,9 @@
 
 namespace aCube\Entities;
 
-
+/**
+ *
+ */
 class LogQueue extends \Eloquent {
 
     /**
@@ -18,6 +20,13 @@ class LogQueue extends \Eloquent {
      * @var string
      */
     protected $table = 'log_queue';
+
+    /**
+     *
+     */
+    public function recodings () {
+        return $this->hasMany('aCube\Entities\LogRecoding', 'uniqueid', 'callid');
+    }
 
     /**
      * @param $query
@@ -68,7 +77,11 @@ class LogQueue extends \Eloquent {
     {
 
         if (!is_null($event)) {
-            return $query->where('event', $event);
+            if ($event == 'COMPLETECALL') {
+                return $query->whereIn('event', array('COMPLETEAGENT', 'COMPLETECALLER'));
+            } else {
+                return $query->where('event', $event);
+            }
         }
 
     	return $query->whereIn('event', array(

@@ -25,7 +25,7 @@ Route::get('file', function(){
 			"Content-Disposition" => "filename=\"$file\"",
 			"Content-length" => filesize($pathToFile),
 			"Content-Transfer-Encoding" => "binary",
-			"Content-Type" => "audio/x-wav",
+			"Content-Type" => "audio/wav audio/x-wav audio/wave audio/x-pn-wav",
 			"X-Pad" => "avoid browser bug"
 		];
 
@@ -50,3 +50,5 @@ Route::get('download', function (){
 	return Response::download($pathToFile, $file, $headers);
 
 });
+
+Route::get('recoding/{file}', ['as' => 'recoding', 'uses' => 'ReportUIController@getRecoding']);
