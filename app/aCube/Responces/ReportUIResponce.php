@@ -164,7 +164,7 @@ class ReportUIResponce extends BaseResponce
 		return array(
 				'queue'        => 'required',
 				'queue_member' => 'required',
-				'event'        => 'required',
+				'event'        => 'in:all,ABANDON,COMPLETEAGENT,COMPLETECALLER,TRANSFER|required',
 				'date_from'    => 'before:'.getDay(1).'|date_format:Y-m-d|required',
 				'date_to'      => 'before:'.getDay(1).'|date_format:Y-m-d|required',
 			);
@@ -192,14 +192,7 @@ class ReportUIResponce extends BaseResponce
 	public function preparate()
 	{
 
-		$events = array(
-					'TRANSFER',
-    	    		'COMPLETECALLER',
-    	    		'COMPLETEAGENT',
-    	    		'ABANDON',
-        		);
-
-		$this->data['event'] = in_array($this->data['event'], $events) ? $this->data['event'] : NULL;
+		$this->data['event'] = $this->data['event'] == 'all' ? NULL : $this->data['event'];
 
 		if ($this->data['queue'] == 'all' && $this->data['queue_member'] == 'all') {
 			

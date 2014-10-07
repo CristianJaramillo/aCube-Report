@@ -235,6 +235,8 @@
 			$("#tCall").text(t2);
 			$("#tAbandon").text(t3);
 
+			$("#table-description tbody").empty();
+			$("#table-description tbody").append("<tr><td colspan=\"3\" style=\"text-align:center;\">Tabla sin contenido</td></tr>");
 		};
 
 		/**
@@ -529,6 +531,8 @@
 					style += 'info';
 				break;
 				case "TRANSFER":
+					style += 'primary';
+				break;
 				case "COMPLETECALLER":
 				case "COMPLETEAGENT":
 					style += 'success';

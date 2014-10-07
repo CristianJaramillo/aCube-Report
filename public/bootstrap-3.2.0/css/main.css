@@ -80,7 +80,7 @@ thead.acube tr th {
 .table > thead > tr.acube > th,
 .table > tbody > tr.acube > th,
 .table > tfoot > tr.acube > th {
-  background-color: #799dc4;
+  background-color: #777;
   color: #fff;
 }
 .table-hover > tbody > tr > td.acube:hover,
@@ -88,6 +88,28 @@ thead.acube tr th {
 .table-hover > tbody > tr.acube:hover > td,
 .table-hover > tbody > tr:hover > .acube,
 .table-hover > tbody > tr.acube:hover > th {
+  background-color: #444;
+}
+.table > thead > tr > td.primary,
+.table > tbody > tr > td.primary,
+.table > tfoot > tr > td.primary,
+.table > thead > tr > th.primary,
+.table > tbody > tr > th.primary,
+.table > tfoot > tr > th.primary,
+.table > thead > tr.primary > td,
+.table > tbody > tr.primary > td,
+.table > tfoot > tr.primary > td,
+.table > thead > tr.primary > th,
+.table > tbody > tr.primary > th,
+.table > tfoot > tr.primary > th {
+  background-color: #799dc4;
+  color: #fff;
+}
+.table-hover > tbody > tr > td.primary:hover,
+.table-hover > tbody > tr > th.primary:hover,
+.table-hover > tbody > tr.primary:hover > td,
+.table-hover > tbody > tr:hover > .primary,
+.table-hover > tbody > tr.primary:hover > th {
   background-color: #4F85BB;
 }
 .title {

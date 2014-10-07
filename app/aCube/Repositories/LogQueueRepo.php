@@ -49,9 +49,20 @@ class LogQueueRepo extends BaseRepo {
      */
     public function logQueue($queue, $from, $to, $event = NULL)
     {
-        $ids = $this->entitie
-                        ->events($event)
-                        ->callids('queuename', $queue, $from, $to);
+        if (is_null($event)) {
+            $ids = $this->entitie
+                            ->queue($queue)
+                            ->date($from, $to)
+                            ->groupBy('callid')
+                            ->lists('callid');
+        } else {
+            $ids = $this->entitie
+                            ->queue($queue)
+                            ->events($event)
+                            ->date($from, $to)
+                            ->groupBy('callid')
+                            ->lists('callid');
+        }
 
         return $this->logQueues($ids, $from, $to);
     }
@@ -93,8 +104,22 @@ class LogQueueRepo extends BaseRepo {
      */
     public function logDate($from, $to, $event = NULL)
     {
+        if (!is_null($event)) {
+            
+            $ids = $this->entitie
+                            ->events($event)
+                            ->date($from, $to)
+                            ->groupBy('callid')
+                            ->lists('callid');
+
+            return $this->logQueues($ids, $from, $to);
+
+
+        }
+
+
         return $this->entitie
-                        ->events($event)
+                        ->events()
                         ->date($from, $to)
                         ->get();
     }
