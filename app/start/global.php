@@ -80,15 +80,27 @@ App::down(function()
 
 require app_path().'/filters.php';
 
+
 /*
-|--------------------------------------------------------------------------
-| Return day
-|--------------------------------------------------------------------------
-*/
-if ( ! function_exists('getDay'))
+ |
+ | Helpers aCube
+ |
+ */
+
+if ( ! function_exists('timeTo') )
 {
-    function getDay($n = 0)
+    function timeTo($n = 0)
     {
         return date("Y-m-d", mktime(0, 0, 0, date('m'), date('d') + $n, date('Y')));
     }
+}
+
+if ( !function_exists('multiexplode') )
+{
+	function multiexplode ($delimiters, $string) 
+	{  
+	    $ready = str_replace($delimiters, $delimiters[0], $string);
+	    $launch = explode($delimiters[0], $ready);
+	    return  $launch;
+	}
 }

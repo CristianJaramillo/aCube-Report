@@ -1,57 +1,34 @@
-<?php
+<?php namespace aCube\Entities;
 
-/**
- * Created by Cristian Jaramillo.
- * User: @CristianJaramillo
- * Date: 29/09/2014
- * Time: 09:40 PM
- */
-
-namespace aCube\Entities;
-
-/**
- *
- */
 class LogQueue extends \Eloquent {
 
-    /**
-     * The database table used by the entitie.
-     *
-     * @var string
-     */
-    protected $table = 'log_queue';
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'log_queue';
 
-    /**
-     *
+	/**
+     * @return aCube\Entities\ConfigQueueMember
      */
-    public function recodings () {
-        return $this->hasMany('aCube\Entities\LogRecoding', 'uniqueid', 'callid');
+    public function recodings()
+    {
+    	return $this->hasMany('aCube\Entities\ConfigQueueMember', 'uniqueid', 'callid');
     }
 
     /**
      * @param $query
-     * @param $column
-     * @param $value
-     * @param $from
-     * @param $to
-     * @return array $query
-     */
-    public function scopeCallids($query, $column, $value, $from, $to)
-    {
-        return $query->where($column, $value)
-                     ->date($from, $to)
-                     ->groupBy('callid')
-                     ->lists('callid');
-    }
-
-    /**
+     * @param $agent
      * @param $query
-     * @param $ids
-     * @return $query
      */
-    public function scopeCalls($query, $ids)
+    public function scopeAgent($query, $agent = NULL)
     {
-        return $query->whereIn('callid', $ids);
+        if ($agent == NULL || empty($agent) || !is_string($agent)) {
+            return $query;
+        }
+
+        return $query->where('agent', $agent);
     }
 
     /**
@@ -84,27 +61,31 @@ class LogQueue extends \Eloquent {
             }
         }
 
-    	return $query->whereIn('event', array(
-    	    		'ENTERQUEUE',
-    	    		'CONNECT',
-    	    		'TRANSFER',
-    	    		'COMPLETECALLER',
-    	    		'COMPLETEAGENT',
-    	    		'EXITWITHTIMEOUT',
-    	    		'EXITEMPTY',
-    	    		'ABANDON',
-        		)
-        	);
+        return $query->whereIn('event', array(
+                    'ENTERQUEUE',
+                    'CONNECT',
+                    'TRANSFER',
+                    'COMPLETECALLER',
+                    'COMPLETEAGENT',
+                    'EXITWITHTIMEOUT',
+                    'EXITEMPTY',
+                    'ABANDON',
+                )
+            );
     }
 
     /**
      * @param $query
      * @param $queue
-     * @return $query
+     * @param $query
      */
-    public function scopeQueue($query, $queue)
+    public function scopeQueue($query, $queue = NULL)
     {
-    	return $query->where('queuename', $queue);
+        if ($queue == NULL || empty($queue) || !is_string($queue)) {
+            return $query;
+        }
+
+        return $query->where('queuename', $queue);
     }
 
-} 
+}

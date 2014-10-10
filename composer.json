@@ -7,7 +7,8 @@
 		"laravel/framework": "4.2.*"
 	},
 	"require-dev": {
-		"barryvdh/laravel-debugbar": "1.*"
+		"barryvdh/laravel-debugbar": "1.*",
+		"way/generators": "~2.0"
 	},
 	"autoload": {
 		"classmap": [
@@ -18,9 +19,9 @@
 			"app/database/seeds",
 			"app/tests/TestCase.php"
 		],
-        "psr-4": {
-            "aCube\\": "app/aCube"
-        }
+		"psr-4": {
+			"aCube\\": "app/aCube"
+		}
 	},
 	"scripts": {
 		"post-install-cmd": [

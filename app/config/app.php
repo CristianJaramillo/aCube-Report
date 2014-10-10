@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://acube',
+	'url' => $_SERVER['SERVER_ADDR'],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return array(
 	|
 	*/
 
-	'key' => 'QEIOupGNiEsej8iUehDMQlH7Rxp30DfA',
+	'key' => 'X5KS5XoQZI5Vcd19DO6bU2hB2FazykiN',
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -122,6 +122,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider',
 	),
 
 	/*
@@ -189,6 +190,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+		
 	),
 
 );

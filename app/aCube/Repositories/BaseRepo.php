@@ -1,41 +1,32 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: LENOVOW8
- * Date: 29/09/2014
- * Time: 10:02 PM
- */
-
-namespace aCube\Repositories;
-
+<?php namespace aCube\Repositories;
 
 abstract class BaseRepo {
 
-    /**
-     *
-     * @var \Eloquent
-     */
-    protected $entitie;
+	/**
+	 * @var aCube\Entitie\~
+	 */
+	protected $entitie;
 
-    /**
-     *
-     */
-    public function __construct()
-    {
-       $this->entitie = $this->getEntitie();
-    }
+	/**
+	 * Constructor de BaseRepo
+	 */
+	public function __construct()
+	{
+		$this->entitie = $this->getEntitie();
+	}
 
-    /**
-     * @return
-     */
-    public function all()
-    {
-        return $this->entitie->all();
-    }
+	/**
+	 * @param int $id
+	 * @return object
+	 */
+	public function find($id)
+	{
+		return $this->entitie->find($id);
+	}
 
-    /**
-     * @return \Eloquent
-     */
-    abstract public function getEntitie();
+	/**
+	 * @return aCube\Entitie\~
+	 */
+	public function getEntitie(){}
 
 } 

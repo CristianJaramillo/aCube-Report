@@ -2,7 +2,7 @@
 
 class BaseController extends Controller {
 
-    /**
+	/**
      * Default Layout
      *
      * @var string
@@ -53,10 +53,10 @@ class BaseController extends Controller {
     protected function getPage()
     {
         return (object) array(
-            'app'         => 'apps.report',
+            'app'         => 'apps.dashboard',
             'description' => 'aCube - Call Center',
             'lang'        => 'es',
-            'layout'      => 'layouts.default',
+            'layout'      => 'layouts.layout',
             'title'       => 'aCube - Call Center',
         );
     }

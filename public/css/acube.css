@@ -1,0 +1,120 @@
+#table-ui tbody tr td:last-child{
+  text-align: center;
+}
+
+.table-responsive {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.table > thead > tr > td.primary,
+.table > tbody > tr > td.primary,
+.table > tfoot > tr > td.primary,
+.table > thead > tr > th.primary,
+.table > tbody > tr > th.primary,
+.table > tfoot > tr > th.primary,
+.table > thead > tr.primary > td,
+.table > tbody > tr.primary > td,
+.table > tfoot > tr.primary > td,
+.table > thead > tr.primary > th,
+.table > tbody > tr.primary > th,
+.table > tfoot > tr.primary > th {
+  background-color: #799dc4;
+  color: #fff;
+}
+.table-hover > tbody > tr > td.primary:hover,
+.table-hover > tbody > tr > th.primary:hover,
+.table-hover > tbody > tr.primary:hover > td,
+.table-hover > tbody > tr:hover > .primary,
+.table-hover > tbody > tr.primary:hover > th {
+  background-color: #4F85BB;
+}
+
+/******************************************/
+
+    .modalmask {
+      position: fixed;
+      font-family: Arial, sans-serif;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 99999;
+      opacity:0;
+      -webkit-transition: opacity 400ms ease-in;
+      -moz-transition: opacity 400ms ease-in;
+      transition: opacity 400ms ease-in;
+      pointer-events: none;
+    }
+    .modalmask:target {
+      opacity:1;
+      pointer-events: auto;
+    }
+    .modalbox{
+      background: transparent url(../img/packman-loader.gif) no-repeat;
+      background-size: 36px 36px;
+      height: 36px;
+      position: relative;
+      -webkit-transition: all 500ms ease-in;
+      -moz-transition: all 500ms ease-in;
+      transition: all 500ms ease-in;
+      width: 36px;
+    }
+
+    .movedown {
+      margin: 0 auto;
+    }
+    .rotate {
+      margin: 10% auto;
+      -webkit-transform: scale(-5,-5); 
+      transform: scale(-5,-5);
+    }
+    .resize {
+      margin: 10% auto;
+      width:0;
+      height:0;
+
+    }
+    .modalmask:target .movedown{    
+      margin: 10% auto;
+    }
+    .modalmask:target .rotate{    
+      transform: rotate(360deg) scale(1,1);
+        -webkit-transform: rotate(360deg) scale(1,1);
+    }
+
+    .modalmask:target .resize{
+      height: 36px;
+      width: 36px;
+    }
+
+
+
+    .close {
+      background: #606061;
+      color: #FFFFFF;
+      line-height: 25px;
+      position: absolute;
+      right: 1px;
+      text-align: center;
+      top: 1px;
+      width: 24px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius:3px;
+      font-size:16px;
+    }
+
+    .close:hover { 
+      background: #FAAC58; 
+      color:#222;
+    }
+
+    a.close{
+      text-decoration:none;
+      font-family: 'Black Ops One', cursive;
+      font-size:25px;
+    }
+
+/**************************************************/

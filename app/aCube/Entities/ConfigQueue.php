@@ -1,14 +1,4 @@
-<?php
-
-/**
- * Created by Cristian Jaramillo.
- * User: @CristianJaramillo
- * Date: 29/09/2014
- * Time: 09:40 PM
- */
-
-namespace aCube\Entities;
-
+<?php namespace aCube\Entities;
 
 class ConfigQueue extends \Eloquent {
 
@@ -20,7 +10,7 @@ class ConfigQueue extends \Eloquent {
     protected $table = 'config_queues';
 
     /**
-     * @return
+     * @return aCube\Entities\ConfigQueueMember
      */
     public function members()
     {
