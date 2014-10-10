@@ -19,11 +19,12 @@
 								<th>Espera</th>
 									<th>Duraci&oacute;n</th>
 								<th>Finalizo</th>
+								<th>Observaciones</th>
 							</tr>
 						</thead>
 						<tbody class="table-striped">
 							<tr>
-							<td colspan="7">
+							<td colspan="8">
 								<center>Tabla sin contenido!</center>
 								</td>
 							</tr>

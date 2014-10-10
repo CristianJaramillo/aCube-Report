@@ -1,6 +1,58 @@
-#table-ui tbody tr td:last-child{
-  text-align: center;
+body {
+  margin-top: 0;
 }
+
+#table-ui tbody tr td:last-child{
+  text-align: justify;
+}
+
+.bg-success {
+  background-color: #F9F9F9;
+  padding-top: 15px;
+}
+a.bg-success:hover {
+  background-color: #c1e2b3;
+}
+
+.facebook{
+  background-image: url(../img/facebook.png);
+}
+.facebook:hover{
+  background-image: url(../img/facebook-hover.png);
+}
+.facebook, .google, .twitter, .youtube{
+  background-color: transparent;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+  cursor: pointer;
+  display: inline-block;
+  height: 32px;
+  padding: 0 4px;
+  width: 32px;
+}
+.facebook:hover, .google:hover, .twitter:hover, .youtube:hover{
+  background-color: #FFFFFF;
+}
+.google{
+  background-image: url(../img/google.png);
+}
+.google:hover{
+  background-image: url(../img/google-hover.png);
+}
+.twitter{
+  background-image: url(../img/twitter.png);
+}
+.twitter:hover{
+  background-image: url(../img/twitter-hover.png);
+}
+.youtube{
+  background-image: url(../img/youtube.png);
+}
+.youtube:hover{
+  background-image: url(../img/youtube-hover.png);
+}
+
 
 .table-responsive {
   max-height: 400px;
@@ -28,6 +80,20 @@
 .table-hover > tbody > tr:hover > .primary,
 .table-hover > tbody > tr.primary:hover > th {
   background-color: #689acc;
+}
+
+.title {
+  color: #F2F2F2;
+  display: inline-block;
+  font-size: 16px;
+}
+.title img {
+  display: inline-block;
+}
+.title span {
+  color: #C9C9C9;
+  display: none;
+  font-size: 16px;
 }
 
 /******************************************/
@@ -118,3 +184,34 @@
     }
 
 /**************************************************/
+
+@media screen and (min-width: 992px) {
+  .social-buttons{
+    margin-top: 33.5px;
+  }
+  .title {
+    font-size: 26px;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .social-buttons{
+    margin-top: 34px;
+  }
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 768px){
+  .title {
+    font-size: 22px;
+  }
+  .title span {
+    display: inline-block;
+  }
+}

@@ -98,7 +98,7 @@
 			$("#recording-sounds").empty();
 			$("#recording-sounds").append("<tr><td class=\"text-center\">Sin grabaciones disponibles</td></tr>");
 			el.table.tbody.empty();
-			el.table.tbody.append("<tr><td colspan=\"7\"><center>No se ha encontrado ningun registro!</center></td></tr>");
+			el.table.tbody.append("<tr><td colspan=\"8\"><center>No se ha encontrado ningun registro!</center></td></tr>");
 			setDataDashboard();
 		};
 
@@ -231,8 +231,6 @@
 			$("#tCall").text(t2);
 			$("#tAbandon").text(t3);
 
-			$("#table-description tbody").empty();
-			$("#table-description tbody").append("<tr><td colspan=\"3\" style=\"text-align:center;\">Tabla sin contenido</td></tr>");
 		};
 
 		/**
@@ -295,6 +293,8 @@
 			// Ultimo estado de llamada.
 			callSumary[6] = row[--size].event;
 
+			callSumary[7] = '';
+
 			// Obtención de resumen de llamada.
 			$.each(row, function (index, call) {
 				switch (call.event) {
@@ -329,6 +329,7 @@
 						if (callSumary[5] == undefined) {
 							callSumary[5] = call.duration;// Duración
 						};
+						callSumary[7] += "Llamada transferida a " + call.transfer;
 					break;
 					case "COMPLETECALLER":
 						completecaller++;
@@ -337,6 +338,7 @@
 						};
 						callSumary[4] = call.waiting;     // Espera
 						callSumary[5] = call.duration;    // Duración
+						callSumary[7] += "Llamada finalizada por el cliente.";
 					break;
 					case "COMPLETEAGENT":
 						completeagent++;
@@ -345,22 +347,26 @@
 						};
 						callSumary[4] = call.waiting;     // Espera
 						callSumary[5] = call.duration;    // Duración
+						callSumary[7] += "Llamada finalizada por el agent.";
 					break;
 					case "EXITWITHTIMEOUT":
 						exitwithtimeout++;
 						if (callSumary[4] == undefined) {
 							callSumary[4] = call.waiting;  // Espera
 						};
+						callSumary[7] += "Tiempo maximo de espera en cola!<br/>";
 					break;
 					case "EXITEMPTY":
 						exitempty++;
 						if (callSumary[4] == undefined) {
 							callSumary[4] = call.waiting;  // Espera
 						};
+						callSumary[7] += "Salio de cola, no hay agentes!";
 					break;
 					case "ABANDON":
 						abandon++;
 						callSumary[4] = call.waiting;      // Espera
+						callSumary[7] += "Llamada perdida!";
 					break;
 				};
 			});
@@ -433,10 +439,8 @@
 					$(this).parent('td').parent('tr').addClass(style);
 
 					var list = $("#recording-sounds");
-					var tbody = $("#table-description tbody");
 
 					list.empty();
-					tbody.empty();
 
 					$.each(logReport, function (id, logCall) {
 						if (id == callid) {
@@ -458,6 +462,7 @@
 								};
 							});
 
+							/*
 							$.each(logCall, function (index, obj) {
 							
 								var tr = $("<tr/>");
@@ -535,6 +540,7 @@
 								tbody.append(tr);
 
 							});
+							*/
 						};
 					});
 
