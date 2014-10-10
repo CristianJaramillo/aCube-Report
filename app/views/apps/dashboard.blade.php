@@ -12,4 +12,8 @@
 
 	@yield('summary')
 
+	@include('apps.recording-and-download')
+
+	@yield('recording-and-download')
+
 @endsection

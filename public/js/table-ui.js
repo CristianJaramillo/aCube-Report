@@ -96,7 +96,7 @@
 			// el.msg.alert.empty();
 			// el.msg.alert.hide();
 			$("#recording-sounds").empty();
-			$("#recording-sounds").append("<a href=\"#\" class=\"list-group-item text-center\">Sin grabaciones disponibles</a>");
+			$("#recording-sounds").append("<tr><td class=\"text-center\">Sin grabaciones disponibles</td></tr>");
 			el.table.tbody.empty();
 			el.table.tbody.append("<tr><td colspan=\"7\"><center>No se ha encontrado ningun registro!</center></td></tr>");
 			setDataDashboard();
@@ -444,11 +444,17 @@
 							$.each(logRecoding, function (index, obj) {
 								if (index==id) {
 									$.each(obj, function (key, src) {
-										list.append("<a href=\"#\" class=\"list-group-item text-center\"><audio controls><source src=\"" + src +"\" type=\"audio/wav\"></audio></a>");
+										var tr = $("<tr/>");
+
+										src = window.location.origin + "/recording/" + src;
+
+										tr.append("<td class=\"text-center\"><audio controls><source src=\"" + src +"\" type=\"audio/wav\"></audio></td>");
 										
 										var download = src.replace('recording', 'download');
-										list.append("<span href=\"#\" class=\"list-group-item text-center\"><a class=\"btn btn-success  btn-lg btn-block\" href=\""+download+"\">Descargar</a></span>");
+										tr.append("<td class=\"text-center\"><a class=\"btn btn-success \" href=\""+download+"\" target=\"_blank\">Descargar</a></td>");
+										list.append(tr);
 									});
+
 								};
 							});
 
@@ -509,17 +515,18 @@
 									row[2] = 0;
 								};
 
-								row[1] = time(parseInt(row[1]));
-								row[2] = time(parseInt(row[2]));
-
-								if (obj.event=="ENTERQUEUE") {
+								
+								if (row[1] == 0) {
 									row[1] = '';
-									row[2] = '';
-								};
+								} else {
+									row[1] = time(parseInt(row[1]));
+								}
 
-								if (obj.event=="CONNECT") {
+								if (row[2] == 0) {
 									row[2] = '';
-								};
+								} else {
+									row[2] = time(parseInt(row[2]));
+								}
 
 								for (var i in row) {
 									tr.append("<td>"+row[i]+"</td>");

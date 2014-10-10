@@ -11,6 +11,8 @@
 |
 */
 
+Debugbar::disable();
+
 Route::get('/', ['as' => 'dashboar', 'uses' => 'DashboardController@show']);
 
 Route::post('report', ['as' => 'report', 'uses' => 'LogQueueController@report']);

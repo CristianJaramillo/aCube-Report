@@ -33,7 +33,7 @@ class LogRecordingResponse extends BaseResponse {
 	public function existsPathToFile($path)
 	{
 		if (!\File::exists($path)) {
-			throw new ResponseException();
+			throw new ResponseException('Not found file in: '.$path);
 		}
 	}
 

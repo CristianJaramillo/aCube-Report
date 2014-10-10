@@ -6,7 +6,7 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <i class="fa fa-clock-o fa-fw"></i> 
+                                <i class="fa fa-asterisk fa-fw"></i> 
                                 Panel de Llamadas
                             </h3>
                         </div>
@@ -44,7 +44,7 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <i class="fa fa-clock-o fa-fw"></i> 
+                                <i class="fa fa-asterisk fa-fw"></i> 
                                 Historial de Llamadas
                             </h3>
                         </div>
@@ -64,23 +64,6 @@
                                 </tbody>
                             </table>
                         </div>   
-                    </div>
-                </div>
-            </div>
-            <div class="row-fluid">
-                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-12">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">
-                                <i class="fa fa-clock-o fa-fw"></i> 
-                                Grabaciones de llamada
-                            </h3>
-                        </div>
-                        <div class="list-group" id="recording-sounds">
-                            <a href="#" class="list-group-item text-center">
-                                Sin grabaciones disponibles.
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>

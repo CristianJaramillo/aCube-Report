@@ -122,28 +122,13 @@ class LogQueueResponse extends BaseResponse {
 	public function execute()
 	{
 		$callIds = $this->listsIds($this->data);
-		/*
-		echo "<pre>";
-		print_r($callIds);
-		echo "</pre>";
-		*/
-
+		
 		if (is_array($callIds) && !empty($callIds)) {
 
             $recodings = $this->listsRecordings($callIds);
+        	$this->setMessage($recodings);
         	
-            $this->setMessage($recodings);
-        	/*	
-        	echo "<pre>";
-			print_r($recodings);
-			echo "</pre>";
-			*/
-			$calls = $this->preparateSuccess($this->listsCalls($callIds, $this->data));			
-			/*
-			echo "<pre>";
-			print_r($calls);
-			echo "</pre>";
-			*/
+        	$calls = $this->preparateSuccess($this->listsCalls($callIds, $this->data));			
 			$this->setSuccess($calls);
         }
 	}
@@ -183,7 +168,7 @@ class LogQueueResponse extends BaseResponse {
 			if (!isset($recordingsURL[$recording->uniqueid])) {
 				$recordingsURL[$recording->uniqueid] = array();
 			}			
-			$recordingsURL[$recording->uniqueid][] = asset('recording/' . $recording->id . '/' . $recording->uniqueid); 
+			$recordingsURL[$recording->uniqueid][] = $recording->id . '/' . $recording->uniqueid; 
 		}
 
 		return $recordingsURL;

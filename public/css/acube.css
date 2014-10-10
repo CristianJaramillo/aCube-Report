@@ -27,7 +27,7 @@
 .table-hover > tbody > tr.primary:hover > td,
 .table-hover > tbody > tr:hover > .primary,
 .table-hover > tbody > tr.primary:hover > th {
-  background-color: #4F85BB;
+  background-color: #689acc;
 }
 
 /******************************************/
