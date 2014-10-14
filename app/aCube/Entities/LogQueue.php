@@ -77,7 +77,7 @@ class LogQueue extends \Eloquent {
     /**
      * @param $query
      * @param $queue
-     * @param $query
+     * @return $query
      */
     public function scopeQueue($query, $queue = NULL)
     {

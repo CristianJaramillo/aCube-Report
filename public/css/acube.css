@@ -1,7 +1,14 @@
 body {
   margin-top: 0;
+  background-color: #F9F9F9;
 }
-
+.bg-black {
+  color: #fff;
+  background-color: #242424;
+}
+a.bg-black:hover {
+  background-color: #444444;
+}
 #table-ui tbody tr td:last-child{
   text-align: justify;
 }

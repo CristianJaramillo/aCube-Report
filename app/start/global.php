@@ -53,6 +53,18 @@ App::error(function(Exception $exception, $code)
 
 /*
 |--------------------------------------------------------------------------
+| Application Error Response Handler
+|--------------------------------------------------------------------------
+|
+*/
+
+App::error(function(aCube\Responses\ResponseException $exception)
+{
+	return Response::view('layouts.error', array($exception->getMessage()), 404);
+});
+
+/*
+|--------------------------------------------------------------------------
 | Maintenance Mode Handler
 |--------------------------------------------------------------------------
 |

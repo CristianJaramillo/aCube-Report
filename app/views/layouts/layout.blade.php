@@ -38,7 +38,7 @@
 
         <!-- #wrapper -->
         
-        <div class="container-fluid">
+        <div class="bg-black container-fluid">
             
             <header lass="col-sx-12">
                 <div class="row">
@@ -68,11 +68,25 @@
             </header>
         </div>
 
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>  
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    @include('apps.form')
+                    @yield('form')
+                </div>        
+            </div>
+        </nav>
+
         <div class="container-fluid bg-success" >
-
-            @include('apps.form')
-            @yield('form')
-
+        
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" >
                     @include('apps.category-call')
