@@ -98,7 +98,7 @@
 			$("#recording-sounds").empty();
 			$("#recording-sounds").append("<tr><td class=\"text-center\">Sin grabaciones disponibles</td></tr>");
 			el.table.tbody.empty();
-			el.table.tbody.append("<tr><td colspan=\"8\"><center>No se ha encontrado ningun registro!</center></td></tr>");
+			el.table.tbody.append("<tr><td colspan=\"9\"><center>No se ha encontrado ningun registro!</center></td></tr>");
 			setDataDashboard();
 		};
 
@@ -126,6 +126,8 @@
 			nodeStruct();
 			// Agregamos los eventos a los controles
 			addFunctions();
+			// Obtenemos el token.
+			settings.data = {"_token": el.find("input[name='_token']").val()};
 			// Obtenenos las queueMembers
 			loadData(beforeQueue, errorQueue, successQueue);
 		};
@@ -295,87 +297,95 @@
 
 			callSumary[7] = '';
 
+			var this_connect = 0;
+			var this_abandon = 0;
+			var this_exitwithtimeout = 0;		
+
 			// Obtención de resumen de llamada.
 			$.each(row, function (index, call) {
+				
+				if (callSumary[0] == undefined && call.time != undefined) {
+					callSumary[0] = call.time;    // Fecha
+				};
+				
+				if (call.queue != undefined) {
+					callSumary[1] = call.queue;    // Cola
+				};
+
+				if (call.agent != undefined) {
+					callSumary[2] = call.agent;   // Agente
+				};
+
 				switch (call.event) {
 					case "ENTERQUEUE":
-						if (callSumary[0] == undefined) {
-							callSumary[0] = call.time;    // Fecha
-						};
-						if (callSumary[1] == undefined) {
-							callSumary[1] = call.queue;    // Cola
-						};
 						if (callSumary[3] == undefined) {
 							callSumary[3] = call.phone;    // Telefono
 						};
+						// callSumary[7] += "Llamada ingreso a la cola de " + call.queue + "<br/>";
 					break;
 					case "CONNECT":
-						connect++;
-						if (callSumary[2] == undefined) {
-							callSumary[2] = call.agent;   // Agente
-						};
+						this_connect++;
 						if (callSumary[4] == undefined) {
 							callSumary[4] = call.waiting; // Espera
 						};
+						// callSumary[7] += "Llamada atendida por "  + call.agent + "<br/>";
 					break;
 					case "TRANSFER":
 						transfer++;
-						if (callSumary[2] == undefined) {
-							callSumary[2] = call.agent;   // Agente
-						};
 						if (callSumary[4] == undefined) {
 							callSumary[4] = call.waiting; // Espera
 						};
 						if (callSumary[5] == undefined) {
 							callSumary[5] = call.duration;// Duración
 						};
-						callSumary[7] += "Llamada transferida a " + call.transfer;
+						callSumary[7] += "Llamada transferida a " + call.transfer + "<br/>";
 					break;
 					case "COMPLETECALLER":
 						completecaller++;
-						if (callSumary[2] == undefined) {
-							callSumary[2] = call.agent;   // Agente
-						};
 						callSumary[4] = call.waiting;     // Espera
 						callSumary[5] = call.duration;    // Duración
-						callSumary[7] += "Llamada finalizada por el cliente.";
+						callSumary[7] += "Llamada finalizada por el cliente.<br/>";
 					break;
 					case "COMPLETEAGENT":
 						completeagent++;
-						if (callSumary[2] == undefined) {
-							callSumary[2] = call.agent;   // Agente
-						};
 						callSumary[4] = call.waiting;     // Espera
 						callSumary[5] = call.duration;    // Duración
-						callSumary[7] += "Llamada finalizada por el agent.";
+						callSumary[7] += "Llamada finalizada por el agent.<br/>";
 					break;
 					case "EXITWITHTIMEOUT":
+						this_exitwithtimeout++;
 						exitwithtimeout++;
 						if (callSumary[4] == undefined) {
 							callSumary[4] = call.waiting;  // Espera
 						};
-						callSumary[7] += "Tiempo maximo de espera en cola!<br/>";
+						callSumary[7] += "Tiempo maximo de espera "+time(parseInt(call.waiting))+" en cola de " + call.queue + "!<br/>";
 					break;
 					case "EXITEMPTY":
 						exitempty++;
 						if (callSumary[4] == undefined) {
 							callSumary[4] = call.waiting;  // Espera
 						};
-						callSumary[7] += "Salio de cola, no hay agentes!";
+						callSumary[7] += "Salio de cola, no hay agentes disponible!<br/>";
 					break;
 					case "ABANDON":
-						abandon++;
+						this_abandon++;
 						callSumary[4] = call.waiting;      // Espera
-						callSumary[7] += "Llamada perdida!";
+						callSumary[7] += "Llamada perdida!<br/>";
 					break;
 				};
+
 			});
+
+			// Conteo de eventos globales
+			if (this_connect) {connect++};
+			if (this_abandon) {abandon++};
+
 
 			if (callSumary[2] == undefined) {
 				callSumary[2] = "NONE";         // Agente
 			};
 			
-			if (callSumary[3] == '') {
+			if (callSumary[3] == undefined || callSumary[3] == '') {
 				callSumary[3] = 'Privado';    // Telefono
 			};
 
@@ -400,6 +410,8 @@
 			callSumary[4] = time(parseInt(callSumary[4]));
 			callSumary[5] = time(parseInt(callSumary[5]));
 			callSumary[6] = status(callSumary[6]);
+			// callSumary[7] = "<textarea>" + callSumary[7] + "</textarea>";
+			callSumary[8] = this_exitwithtimeout;
 
 			// Agregamos las nuevas columnas
 			for (var i in callSumary) {
@@ -461,6 +473,10 @@
 
 								};
 							});
+
+							if (!list.find("tr").length) {
+								list.append("<tr><td class=\"text-center\">Sin grabaciones disponibles</td></tr>");
+							};
 
 							/*
 							$.each(logCall, function (index, obj) {

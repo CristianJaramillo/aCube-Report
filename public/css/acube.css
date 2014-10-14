@@ -9,7 +9,7 @@ body {
 a.bg-black:hover {
   background-color: #444444;
 }
-#table-ui tbody tr td:last-child{
+#table-ui tbody tr td:nth-child(8n){
   text-align: justify;
 }
 
@@ -94,7 +94,7 @@ a.bg-success:hover {
   display: inline-block;
   font-size: 16px;
 }
-.title img {
+header img {
   display: inline-block;
 }
 .title span {
@@ -215,10 +215,13 @@ a.bg-success:hover {
 }
 
 @media screen and (min-width: 768px){
+  header img {
+    margin-bottom: 8.5px;
+  }
   .title {
     font-size: 22px;
   }
   .title span {
-    display: inline-block;
+    display: block;
   }
 }

@@ -37,6 +37,8 @@ class LogQueueResponse extends BaseResponse {
 			
 			case 'CONNECT':
 				$row = [
+					'time' => $call->time,       // Hora de inicio.
+					'queue' => $call->queuename, // Cola de atención.
 					'agent'    => $call->agent,
 					'waiting'  => $call->data1,					
 				];
@@ -44,6 +46,8 @@ class LogQueueResponse extends BaseResponse {
 
 			case 'TRANSFER':
 				$row = [
+					'time' => $call->time,       // Hora de inicio.
+					'queue' => $call->queuename, // Cola de atención.
 					'agent'    => $call->agent,
 					'transfer' => $call->data1,
 					'waiting'  => $call->data3,
@@ -54,6 +58,8 @@ class LogQueueResponse extends BaseResponse {
 			case 'COMPLETECALLER':
 							
 				$row = [
+					'time' => $call->time,       // Hora de inicio.
+					'queue' => $call->queuename, // Cola de atención.
 					'agent'   => $call->agent,
 					'waiting'  => $call->data1,
 					'duration' => $call->data2,						
@@ -64,6 +70,8 @@ class LogQueueResponse extends BaseResponse {
 			case 'COMPLETEAGENT':
 							
 				$row = [
+					'time' => $call->time,       // Hora de inicio.
+					'queue' => $call->queuename, // Cola de atención.
 					'agent'    => $call->agent,
 					'waiting'  => $call->data1,
 					'duration' => $call->data2,						
@@ -74,6 +82,8 @@ class LogQueueResponse extends BaseResponse {
 			case 'EXITWITHTIMEOUT':
 							
 				$row = [
+					'time' => $call->time,       // Hora de inicio.
+					'queue' => $call->queuename, // Cola de atención.
 					'waiting'  => $call->data3,					
 				];
 
@@ -81,12 +91,14 @@ class LogQueueResponse extends BaseResponse {
 
 			case 'EXITEMPTY':
 				$row = [
+					'time' => $call->time,       // Hora de inicio.
 					'waiting'  => $call->data3,					
 				];
 			break;
 
 			case 'ABANDON':
 				$row = [
+					'queue' => $call->queuename, // Cola de atención.
 					'waiting'  => $call->data3,
 				];
 			break;

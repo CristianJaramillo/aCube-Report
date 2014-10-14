@@ -15,9 +15,11 @@ Debugbar::disable();
 
 Route::get('/', ['as' => 'dashboar', 'uses' => 'DashboardController@show']);
 
-Route::post('report', ['as' => 'report', 'uses' => 'LogQueueController@report']);
+Route::group(array('before' => 'csrf'), function() {
+	Route::post('report', ['as' => 'report', 'uses' => 'LogQueueController@report']);
 
-Route::post('queues-and-members', ['as' => 'queues-and-members', 'uses' => 'QueueController@withMembers']);
+	Route::post('queues-and-members', ['as' => 'queues-and-members', 'uses' => 'QueueController@withMembers']);
+});
 
 Route::get('recording/{id}/{uniqueid}', ['as' => 'recording', 'uses' => 'RecordingController@make']);
 
