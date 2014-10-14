@@ -15,23 +15,23 @@
                     </a>
                     <a href="#" class="list-group-item">
                         <span class="badge" id="b">0</span>
-                        Atendidas
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <span class="badge" id="c">0</span> 
-                        Abandonadas
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Atendidas
                     </a>
                     <a href="#" class="list-group-item">
                         <span class="badge" id="d">0</span>
-                        Finalizada por el cliente
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finalizada por el cliente
                     </a>
                     <a href="#" class="list-group-item">
                         <span class="badge" id="e">0</span>
-                        Finalizada por el agente
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finalizada por el agente
                     </a>
                     <a href="#" class="list-group-item">
                         <span class="badge" id="f">0</span>
-                        Trasferidas
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Trasferidas
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" id="c">0</span> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abandonadas
                     </a>
                 </div>
             </div>

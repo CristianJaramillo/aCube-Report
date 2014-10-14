@@ -113,7 +113,7 @@
             </div>
 
         </div>
-            
+
         <!-- /#wrapper -->
 
         <!-- jQuery Version 1.11.0 -->
@@ -135,6 +135,8 @@
             function start() 
             {
                 $("body").startUX();
+
+                $('#history-call').modal('toggle');
 
                 $('#form-filter').tableUI({
                     "url_response": "{{ route('report') }}",

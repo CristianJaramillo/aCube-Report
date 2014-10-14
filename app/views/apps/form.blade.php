@@ -10,6 +10,7 @@
             {{ Form::select('event', array(
 										'ALL' => '-- All Events --',
     									'TRANSFER' => 'TRANSFER',
+    									'EXITWITHTIMEOUT' => 'DESBORDE',
     									'COMPLETECALL' => 'COMPLETECALL',
     									'ABANDON' => 'ABANDON',), 'ALL', 
     								 array('class' => 'form-control', 'id' => 'event', 'required', 'title' => 'Event')) }}

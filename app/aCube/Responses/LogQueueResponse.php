@@ -218,7 +218,7 @@ class LogQueueResponse extends BaseResponse {
 		return array(
 				'queue'        => 'required',
 				'queue_member' => 'required',
-				'event'        => 'in:ALL,ABANDON,COMPLETECALL,COMPLETEAGENT,COMPLETECALLER,TRANSFER|required',
+				'event'        => 'in:ALL,ABANDON,COMPLETECALL,COMPLETEAGENT,COMPLETECALLER,EXITWITHTIMEOUT,TRANSFER|required',
 				'date_from'    => 'before:'.timeTo(1).'|date_format:Y-m-d|required',
 				'date_to'      => 'before:'.timeTo(1).'|date_format:Y-m-d|required',
 			);

@@ -21,6 +21,10 @@
                         <span class="badge" id="tAbandon">00:00:00</span>
                         Espera previo a abandono
                     </a>
+                    <a href="#" class="list-group-item">
+                        <span class="badge" id="g">0</span>
+                        Desbordes
+                    </a>
 	            </div>
             </div>
 		</div>

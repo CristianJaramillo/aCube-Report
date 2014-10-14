@@ -20,12 +20,11 @@
 									<th>Duraci&oacute;n</th>
 								<th>Finalizo</th>
 								<th>Observaciones</th>
-								<th>Desbordes</th>
 							</tr>
 						</thead>
 						<tbody class="table-striped">
 							<tr>
-							<td colspan="9">
+							<td colspan="8">
 								<center>Tabla sin contenido!</center>
 								</td>
 							</tr>
